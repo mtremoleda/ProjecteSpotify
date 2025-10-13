@@ -11,13 +11,15 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("ApiSpotify")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("InterficieSpotify")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2b8bea6c0a38f9d5c52739855daafcc5b2a51192")]
-[assembly: System.Reflection.AssemblyProductAttribute("ApiSpotify")]
-[assembly: System.Reflection.AssemblyTitleAttribute("ApiSpotify")]
+[assembly: System.Reflection.AssemblyProductAttribute("InterficieSpotify")]
+[assembly: System.Reflection.AssemblyTitleAttribute("InterficieSpotify")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
+[assembly: System.Runtime.Versioning.TargetPlatformAttribute("Windows7.0")]
+[assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("Windows7.0")]
 
 // Generado por la clase WriteCodeFragment de MSBuild.
 
