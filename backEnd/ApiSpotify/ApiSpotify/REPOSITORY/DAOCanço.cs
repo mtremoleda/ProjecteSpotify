@@ -58,10 +58,12 @@ namespace ApiSpotify.REPOSITORY
             return canco;
         }
 
+        public static Canco GetById(DatabaseConnection dbConn, Guid id)
+        {
+            dbConn.Open();
+            string sql = "SELECT Id, Titol, Artista, Album, Durada";
 
-        //public static Canco GetById(DatabaseConnection dbConn, Guid id)
-        //{
-        //    dbConn.Open();
-        //}
+            using SqlCommand cmd = new SqlCommand( sql, dbConn.sqlConnection);
+        }
     }
 }
