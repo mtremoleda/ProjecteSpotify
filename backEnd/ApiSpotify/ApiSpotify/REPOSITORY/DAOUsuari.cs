@@ -27,5 +27,10 @@ namespace ApiSpotify.REPOSITORY
 
             dbConn.Close();
         }
+
+        public static List<Usuari> GetAll(DatabaseConnection dbConn)
+        {
+
+        }
     }
 }
