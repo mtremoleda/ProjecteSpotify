@@ -37,7 +37,7 @@ namespace ApiSpotify.REPOSITORY
 
             dbconn.Open();
 
-            string sql = "SELECT Id, Titol, Artista, Album, Durada";
+            string sql = "SELECT Id, Titol, Artista, Album, Durada FROM Canco";
 
             using SqlCommand cmd = new SqlCommand(sql, dbconn.sqlConnection);
             using SqlDataReader reader = cmd.ExecuteReader();
@@ -61,7 +61,7 @@ namespace ApiSpotify.REPOSITORY
         public static Canco GetById(DatabaseConnection dbConn, Guid id)
         {
             dbConn.Open();
-            string sql = "SELECT Id, Titol, Artista, Album, Durada";
+            string sql = "SELECT Id, Titol, Artista, Album, Durada FROM Canco";
 
             using SqlCommand cmd = new SqlCommand( sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", id);
