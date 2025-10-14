@@ -52,5 +52,32 @@ namespace ApiSpotify.REPOSITORY
             dbConn.Close();
             return usuaris;
         }
+
+        public static Usuari? GetById(DatabaseConnection dbConn, Guid id)
+        {
+            dbConn.Open();
+
+            string sql = "SELECT Id, Nom, Contrasenya, Salt FROM Usuari WHERE Id = @Id";
+
+            using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+            cmd.Parameters.AddWithValue("@Id", id);
+
+            using SqlDataReader reader = cmd.ExecuteReader();
+            Usuari? usuari = null;
+
+            if (reader.Read())
+            {
+                usuari = new Usuari
+                {
+                    Id = reader.GetGuid(0),
+                    Nom = reader.GetString(1),
+                    Contrasenya = reader.GetString(2),
+                    Salt = reader.GetString(3)
+                };
+            }
+
+            dbConn.Close();
+            return usuari;
+        }
     }
 }
