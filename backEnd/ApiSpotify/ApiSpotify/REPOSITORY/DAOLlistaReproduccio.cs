@@ -26,5 +26,29 @@ namespace ApiSpotify.REPOSITORY
 
             dbConn.Close();
         }
+
+        public static List<LlistaReproduccio> GetAll(DatabaseConnection dbConn)
+        {
+            List<LlistaReproduccio> llistes = new();
+            dbConn.Open();
+
+            string sql = "SELECT Id, IdUsuari, Nom FROM LlistaReproduccio";
+
+            using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+            using SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                llistes.Add(new LlistaReproduccio
+                {
+                    Id = reader.GetGuid(0),
+                    IdUsuari = reader.GetGuid(1),
+                    Nom = reader.GetString(2)
+                });
+            }
+
+            dbConn.Close();
+            return llistes;
+        }
     }
 }
