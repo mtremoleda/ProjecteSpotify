@@ -6,5 +6,15 @@
         xmlns:local="clr-namespace:InterficieSpotify"
         mc:Ignorable="d"
         Title="Songs" Height="450" Width="800">
-    <Grid/>
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFA29723"/>
+                <GradientStop Color="White" Offset="1"/>
+                <GradientStop Color="#FF8A897C" Offset="1"/>
+                <GradientStop Color="#FFE7E4C7" Offset="0.87"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Button x:Name="Enrrere" Content="🔙" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="Enrrere_Click" Background="{x:Null}" Height="38" Width="50" FontSize="20" BorderBrush="{x:Null}"/>
+    </Grid>
 </Window>

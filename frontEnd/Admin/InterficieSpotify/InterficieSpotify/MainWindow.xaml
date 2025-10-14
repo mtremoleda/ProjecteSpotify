@@ -21,9 +21,21 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
-        <TextBox HorizontalAlignment="Center" Margin="0,71,0,0" TextWrapping="Wrap" Text="Amb quina taula vols treballar?" VerticalAlignment="Top" Width="182" Grid.Column="1"/>
-        <Button x:Name="Cancons" Content="Songs" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="103,238,0,0" VerticalAlignment="Top" Click="Button_Click_1" Height="41" Width="140"/>
-        <Button Content="Users" HorizontalAlignment="Center" Margin="0,238,0,0" VerticalAlignment="Top" Height="41" Width="140" Grid.Column="1" Click="Button_Click"/>
-        <Button Content="PlayList" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="561,238,0,0" VerticalAlignment="Top" Height="41" Width="140" Click="Button_Click_2"/>
+        <Button x:Name="Cancons" Content="Songs" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="103,238,0,0" VerticalAlignment="Top" Click="Button_Click_1" Height="41" Width="140">
+            <Button.Background>
+                <ImageBrush/>
+            </Button.Background>
+        </Button>
+        <Button Content="Users" HorizontalAlignment="Center" Margin="0,238,0,0" VerticalAlignment="Top" Height="41" Width="140" Grid.Column="1" Click="Button_Click">
+            <Button.Background>
+                <ImageBrush/>
+            </Button.Background>
+        </Button>
+        <Button Content="PlayList" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="561,238,0,0" VerticalAlignment="Top" Height="41" Width="140" Click="Button_Click_2">
+            <Button.Background>
+                <ImageBrush/>
+            </Button.Background>
+        </Button>
+        <Label Content="Amb quina taula vols treballar?" HorizontalAlignment="Center" Margin="0,102,0,0" VerticalAlignment="Top" Width="284" Grid.Column="1" FontSize="20"/>
     </Grid>
 </Window>

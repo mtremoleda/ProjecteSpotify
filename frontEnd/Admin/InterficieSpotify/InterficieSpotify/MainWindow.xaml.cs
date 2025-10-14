@@ -24,7 +24,7 @@ namespace InterficieSpotify
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Songs songs = new Songs();
-            
+            this.Close();
             songs.Show();
         }
 
@@ -32,7 +32,7 @@ namespace InterficieSpotify
         {
 
             Users users = new Users();
-            
+            this.Close();
             users.Show();
 
 
@@ -41,7 +41,7 @@ namespace InterficieSpotify
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             PlayLists playlists = new PlayLists();
-            
+            this.Close();
             playlists.Show();
 
         }

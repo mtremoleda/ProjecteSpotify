@@ -23,5 +23,12 @@ namespace InterficieSpotify
         {
             InitializeComponent();
         }
+
+        private void Enrrere_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainwindow = new MainWindow();
+            this.Close();
+            mainwindow.Show();
+        }
     }
 }

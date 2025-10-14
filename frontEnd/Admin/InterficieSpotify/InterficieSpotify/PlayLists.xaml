@@ -13,5 +13,6 @@
                 <GradientStop Color="#FF3E717B" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
+        <Button x:Name="Enrrere" Content="🔙" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="Enrrere_Click" Background="{x:Null}" Height="38" Width="50" FontSize="20" BorderBrush="{x:Null}"/>
     </Grid>
 </Window>
