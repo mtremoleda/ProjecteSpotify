@@ -1,7 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using static System.Console;
 
-namespace Botiga.Services
+namespace ApiSpotify.Services
 {
     public class DatabaseConnection
     {

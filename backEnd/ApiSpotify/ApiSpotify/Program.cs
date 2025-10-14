@@ -1,4 +1,4 @@
-﻿using Botiga.Services;
+﻿using ApiSpotify.Services;
 using Microsoft.Extensions.Configuration;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
