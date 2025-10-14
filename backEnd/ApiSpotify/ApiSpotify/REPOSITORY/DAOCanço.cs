@@ -64,6 +64,25 @@ namespace ApiSpotify.REPOSITORY
             string sql = "SELECT Id, Titol, Artista, Album, Durada";
 
             using SqlCommand cmd = new SqlCommand( sql, dbConn.sqlConnection);
+            cmd.Parameters.AddWithValue("@Id", id);
+
+            using SqlDataReader reader = cmd.ExecuteReader(); 
+            Canco? canco = null;
+
+            if (reader.Read())
+            {
+                canco = new Canco
+                {
+                    Id = reader.GetGuid(0),
+                    Titol = reader.GetString(1),
+                    Artista = reader.GetString(2),
+                    Album = reader.GetString(3),
+                    Durada = reader.GetDecimal(64),
+                };
+            };
+
+            dbConn.Close();
+            return canco;
         }
     }
 }
