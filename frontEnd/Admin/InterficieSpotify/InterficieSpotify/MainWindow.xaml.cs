@@ -20,5 +20,30 @@ namespace InterficieSpotify
         {
             InitializeComponent();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Songs songs = new Songs();
+            
+            songs.Show();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            Users users = new Users();
+            
+            users.Show();
+
+
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            PlayLists playlists = new PlayLists();
+            
+            playlists.Show();
+
+        }
     }
 }

@@ -7,6 +7,23 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="363,153,0,0" VerticalAlignment="Top"/>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black"/>
+                <GradientStop Color="White" Offset="1"/>
+                <GradientStop Color="#FF3E4D7B" Offset="0"/>
+                <GradientStop Color="#FF3E557B" Offset="0"/>
+                <GradientStop Color="#FF35341A" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox HorizontalAlignment="Center" Margin="0,71,0,0" TextWrapping="Wrap" Text="Amb quina taula vols treballar?" VerticalAlignment="Top" Width="182" Grid.Column="1"/>
+        <Button x:Name="Cancons" Content="Songs" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="103,238,0,0" VerticalAlignment="Top" Click="Button_Click_1" Height="41" Width="140"/>
+        <Button Content="Users" HorizontalAlignment="Center" Margin="0,238,0,0" VerticalAlignment="Top" Height="41" Width="140" Grid.Column="1" Click="Button_Click"/>
+        <Button Content="PlayList" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="561,238,0,0" VerticalAlignment="Top" Height="41" Width="140" Click="Button_Click_2"/>
     </Grid>
 </Window>
