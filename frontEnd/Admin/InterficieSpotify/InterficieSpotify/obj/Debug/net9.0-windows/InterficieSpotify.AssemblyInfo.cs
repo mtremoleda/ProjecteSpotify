@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("InterficieSpotify")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3552b5df1d5b10d473bea09e53bda3e96a2e24f0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1e0311b2eeac31376795148bea73e8d2a650c99c")]
 [assembly: System.Reflection.AssemblyProductAttribute("InterficieSpotify")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InterficieSpotify")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
