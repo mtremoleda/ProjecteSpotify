@@ -29,5 +29,13 @@ namespace ApiSpotify.REPOSITORY
             Console.WriteLine($"{rows} fila inserida.");
             dbConn.Close();
         }
+
+        public static List<Canco> () {
+
+
+        //public static Canco GetById(DatabaseConnection dbConn, Guid id)
+        //{
+        //    dbConn.Open();
+        //}
     }
 }
