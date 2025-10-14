@@ -30,7 +30,27 @@ namespace ApiSpotify.REPOSITORY
 
         public static List<Usuari> GetAll(DatabaseConnection dbConn)
         {
+            List<Usuari> usuaris = new();
+            dbConn.Open();
 
+            string sql = "SELECT Id, Nom, Contrasenya, Salt FROM Usuari";
+
+            using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+            using SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                usuaris.Add(new Usuari
+                {
+                    Id = reader.GetGuid(0),
+                    Nom = reader.GetString(1),
+                    Contrasenya = reader.GetString(2),
+                    Salt = reader.GetString(3)
+                });
+            }
+
+            dbConn.Close();
+            return usuaris;
         }
     }
 }
