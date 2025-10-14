@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Desktop\\2DAM\\ProjecteIntermodular\\ProjecteSpotify\\frontEnd\\Admin\\InterficieSpotify\\InterficieSpotify\\InterficieSpotify.csproj": {}
+    "C:\\Users\\marti\\Desktop\\2DAM\\ProjecteInermodular\\ProjecteSpotify\\frontEnd\\Admin\\InterficieSpotify\\InterficieSpotify\\InterficieSpotify.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Desktop\\2DAM\\ProjecteIntermodular\\ProjecteSpotify\\frontEnd\\Admin\\InterficieSpotify\\InterficieSpotify\\InterficieSpotify.csproj": {
+    "C:\\Users\\marti\\Desktop\\2DAM\\ProjecteInermodular\\ProjecteSpotify\\frontEnd\\Admin\\InterficieSpotify\\InterficieSpotify\\InterficieSpotify.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\2DAM\\ProjecteIntermodular\\ProjecteSpotify\\frontEnd\\Admin\\InterficieSpotify\\InterficieSpotify\\InterficieSpotify.csproj",
+        "projectUniqueName": "C:\\Users\\marti\\Desktop\\2DAM\\ProjecteInermodular\\ProjecteSpotify\\frontEnd\\Admin\\InterficieSpotify\\InterficieSpotify\\InterficieSpotify.csproj",
         "projectName": "InterficieSpotify",
-        "projectPath": "C:\\Users\\User\\Desktop\\2DAM\\ProjecteIntermodular\\ProjecteSpotify\\frontEnd\\Admin\\InterficieSpotify\\InterficieSpotify\\InterficieSpotify.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\2DAM\\ProjecteIntermodular\\ProjecteSpotify\\frontEnd\\Admin\\InterficieSpotify\\InterficieSpotify\\obj\\",
+        "projectPath": "C:\\Users\\marti\\Desktop\\2DAM\\ProjecteInermodular\\ProjecteSpotify\\frontEnd\\Admin\\InterficieSpotify\\InterficieSpotify\\InterficieSpotify.csproj",
+        "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\marti\\Desktop\\2DAM\\ProjecteInermodular\\ProjecteSpotify\\frontEnd\\Admin\\InterficieSpotify\\InterficieSpotify\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
