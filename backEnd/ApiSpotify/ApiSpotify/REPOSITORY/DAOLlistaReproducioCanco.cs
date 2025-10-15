@@ -76,5 +76,27 @@ namespace ApiSpotify.REPOSITORY
             dbConn.Close();
             return relacio;
         }
+
+        public static void Update(DatabaseConnection dbConn, LlistaReproduccioCanco rel)
+        {
+            dbConn.Open();
+
+            string sql = @"UPDATE LlistaReproduccioCanco
+                           SET LlistaId = @LlistaId,
+                               CancoId = @CancoId,
+                               Ordre = @Ordre
+                           WHERE Id = @Id";
+
+            using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+            cmd.Parameters.AddWithValue("@Id", rel.Id);
+            cmd.Parameters.AddWithValue("@IdCanco", rel.IdCanco);
+            cmd.Parameters.AddWithValue("@Canco", rel.Canco);
+            cmd.Parameters.AddWithValue("@IdLlista", rel.IdLlista);
+
+            int rows = cmd.ExecuteNonQuery();
+            Console.WriteLine($"{rows} fila actualitzada.");
+
+            dbConn.Close();
+        }
     }
 }

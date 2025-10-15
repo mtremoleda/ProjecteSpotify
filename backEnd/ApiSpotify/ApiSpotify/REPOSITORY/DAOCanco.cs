@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ApiSpotify.REPOSITORY
 {
-    public class DAOCanço
+    public class DAOCanco
     {
         public static void Insert(DatabaseConnection dbConn, Canco canco)
         {
