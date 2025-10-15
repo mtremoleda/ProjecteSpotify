@@ -35,6 +35,26 @@ namespace ApiSpotify.ENDPOINTS
                 DAOLlistaReproduccio.Insert(dbConn, llista);
                 return Results.Created($"/playlists/{llista.Id}", llista);
             });
+
+            app.MapPut("/playlists/{id}", (Guid id, LlistaRequest req) =>
+            {
+                var existing = DAOLlistaReproduccio.GetById(dbConn, id);
+                if (existing == null)
+                    return Results.NotFound();
+
+                LlistaReproduccio updated = new LlistaReproduccio
+                {
+                    Id = id,
+                    IdUsuari = req.IdUser,
+                    Nom = req.Nom
+                };
+
+                DAOLlistaReproduccio.Update(dbConn, updated);
+                return Results.Ok(updated);
+            });
+
+            app.MapDelete("/playlists/{id}", (Guid id) =>
+                DAOLlistaReproduccio.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
         }
     }
 }
