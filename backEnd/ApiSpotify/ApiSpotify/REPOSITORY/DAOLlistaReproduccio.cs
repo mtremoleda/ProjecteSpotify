@@ -13,13 +13,13 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = @"INSERT INTO Playlist (Id, IdUsuari, Nom)
-                           VALUES (@Id, @IdUsuari, @Nom)";
+            string sql = @"INSERT INTO Playlist (Id, id_user, nom)
+                           VALUES (@Id, @id_user, @nom)";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", llista.Id);
-            cmd.Parameters.AddWithValue("@IdUsuari", llista.IdUsuari);
-            cmd.Parameters.AddWithValue("@Nom", llista.Nom);
+            cmd.Parameters.AddWithValue("@id_user", llista.IdUsuari);
+            cmd.Parameters.AddWithValue("@nom", llista.Nom);
 
             int rows = cmd.ExecuteNonQuery();
             Console.WriteLine($"{rows} fila inserida.");
@@ -32,7 +32,7 @@ namespace ApiSpotify.REPOSITORY
             List<LlistaReproduccio> llistes = new();
             dbConn.Open();
 
-            string sql = "SELECT Id, IdUsuari, Nom FROM Playlist";
+            string sql = "SELECT Id, id_user, nom FROM Playlist";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             using SqlDataReader reader = cmd.ExecuteReader();
@@ -55,7 +55,7 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = "SELECT Id, IdUsuari, Nom FROM Playlist WHERE Id = @Id FROM Playlist";
+            string sql = "SELECT Id, id_user, nom FROM Playlist WHERE Id = @Id FROM Playlist";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", id);
@@ -82,15 +82,14 @@ namespace ApiSpotify.REPOSITORY
             dbConn.Open();
 
             string sql = @"UPDATE Playlist
-                           SET Nom = @Nom,
-                               IdUsuari = @IdUsuari,
-                               UsuariId = @UsuariId
+                           SET Nom = @nom,
+                            id_user = @id_user,
                            WHERE Id = @Id";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", llista.Id);
-            cmd.Parameters.AddWithValue("@Nom", llista.Nom);
-            cmd.Parameters.AddWithValue("@IdUsuari", llista.IdUsuari);
+            cmd.Parameters.AddWithValue("@nom", llista.Nom);
+            cmd.Parameters.AddWithValue("@id_user", llista.IdUsuari);
 
             int rows = cmd.ExecuteNonQuery();
             Console.WriteLine($"{rows} fila actualitzada.");
