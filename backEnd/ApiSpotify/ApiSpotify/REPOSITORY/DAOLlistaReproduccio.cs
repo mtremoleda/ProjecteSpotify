@@ -55,7 +55,7 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = "SELECT Id, IdUsuari, Nom FROM LlistaReproduccio WHERE Id = @Id FROM Playlist_song";
+            string sql = "SELECT Id, IdUsuari, Nom FROM LlistaReproduccio WHERE Id = @Id FROM Playlist";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", id);
