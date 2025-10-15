@@ -82,5 +82,28 @@ namespace ApiSpotify.REPOSITORY
             dbConn.Close();
             return fitxer;
         }
+
+        public static void Update(DatabaseConnection dbConn, QualitatFitxer qualitat)
+        {
+            dbConn.Open();
+
+            string sql = @"UPDATE QualitatFitxer
+                           SET Nom = @Nom,
+                               Bitrate = @Bitrate,
+                               Format = @Format
+                           WHERE Id = @Id";
+
+            using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+            cmd.Parameters.AddWithValue("@Id", qualitat.Id);
+            cmd.Parameters.AddWithValue("@Nom", qualitat.Nom);
+            cmd.Parameters.AddWithValue("@Bitrate", qualitat.Bitrate);
+            cmd.Parameters.AddWithValue("@Format", qualitat.Format);
+
+            int rows = cmd.ExecuteNonQuery();
+            Console.WriteLine($"{rows} fila actualitzada.");
+
+            dbConn.Close();
+        }
+
     }
 }
