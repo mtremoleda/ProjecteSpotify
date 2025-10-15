@@ -50,6 +50,25 @@ namespace ApiSpotify.ENDPOINTS
 
 
             });
+
+            app.MapPut("/cancons/{id}", (Guid id, CancoRequest req) =>
+            {
+                var existing = DAOCanco.GetById(dbConn, id);
+                if (existing == null)
+                    return Results.NotFound();
+
+                Canco updated = new Canco
+                {
+                    Id = id,
+                    Titol = req.Titol,
+                    Artista = req.Artista,
+                    Album = req.Album,
+                    Durada = req.Durada
+                };
+
+                DAOCanco.Update(dbConn, updated);
+                return Results.Ok(updated);
+            });
         }
     }
 
