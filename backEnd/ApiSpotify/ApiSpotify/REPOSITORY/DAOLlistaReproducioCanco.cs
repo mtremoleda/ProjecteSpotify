@@ -13,13 +13,13 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = @"INSERT INTO Playlist_song (Id, IdCanco, IdLlista)
-                           VALUES (@Id, @IdCanco, @IdLlista)";
+            string sql = @"INSERT INTO Playlist_song (Id, id_song, id_playlist)
+                           VALUES (@Id, @id_song, @id_playlist)";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", relacio.Id);
-            cmd.Parameters.AddWithValue("@IdCanco", relacio.IdCanco);
-            cmd.Parameters.AddWithValue("@IdLlista", relacio.IdLlista);
+            cmd.Parameters.AddWithValue("@id_song", relacio.IdCanco);
+            cmd.Parameters.AddWithValue("@id_playlist", relacio.IdLlista);
 
             int rows = cmd.ExecuteNonQuery();
             Console.WriteLine($"{rows} fila inserida.");
@@ -32,7 +32,7 @@ namespace ApiSpotify.REPOSITORY
             List<LlistaReproduccioCanco> relacions = new();
             dbConn.Open();
 
-            string sql = "SELECT Id, IdCanco, IdLlista FROM Playlist_song";
+            string sql = "SELECT Id, id_song, id_playlist FROM Playlist_song";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             using SqlDataReader reader = cmd.ExecuteReader();
@@ -55,7 +55,7 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = "SELECT Id, IdCanco, IdLlista FROM Playlist_song WHERE Id = @Id";
+            string sql = "SELECT Id, id_song, id_playlist FROM Playlist_song WHERE Id = @Id";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", id);
@@ -81,16 +81,15 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = @"UPDATE Playlist_songs
-                           SET LlistaId = @LlistaId,
-                               CancoId = @CancoId,
-                               Ordre = @Ordre
+            string sql = @"UPDATE Playlist_song
+                           SET id_playlist = @id_playlist,
+                               id_song = @id_song,
                            WHERE Id = @Id";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", rel.Id);
-            cmd.Parameters.AddWithValue("@IdCanco", rel.IdCanco);
-            cmd.Parameters.AddWithValue("@IdLlista", rel.IdLlista);
+            cmd.Parameters.AddWithValue("@id_song", rel.IdCanco);
+            cmd.Parameters.AddWithValue("@id_playlist", rel.IdLlista);
 
             int rows = cmd.ExecuteNonQuery();
             Console.WriteLine($"{rows} fila actualitzada.");
