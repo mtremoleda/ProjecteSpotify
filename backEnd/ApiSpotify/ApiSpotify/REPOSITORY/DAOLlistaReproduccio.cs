@@ -32,7 +32,7 @@ namespace ApiSpotify.REPOSITORY
             List<LlistaReproduccio> llistes = new();
             dbConn.Open();
 
-            string sql = "SELECT Id, IdUsuari, Nom FROM LlistaReproduccio";
+            string sql = "SELECT Id, IdUsuari, Nom FROM Playlist_song";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             using SqlDataReader reader = cmd.ExecuteReader();
@@ -55,7 +55,7 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = "SELECT Id, IdUsuari, Nom FROM LlistaReproduccio WHERE Id = @Id FROM LlistaReproduccio";
+            string sql = "SELECT Id, IdUsuari, Nom FROM LlistaReproduccio WHERE Id = @Id FROM Playlist_song";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", id);
