@@ -1,22 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using UI.Spotify.MODELS;
 
 namespace InterficieSpotify
 {
-    /// <summary>
-    /// Lógica de interacción para Users.xaml
-    /// </summary>
     public partial class Users : Window
     {
         public Users()
@@ -24,11 +14,51 @@ namespace InterficieSpotify
             InitializeComponent();
         }
 
+        private async void CarregarDades_Click(object sender, RoutedEventArgs e)
+        {
+            await CargarCancionesAsync();
+        }
+
+        private async Task CargarCancionesAsync()
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    string url = "http://localhost:56833/users";
+                    var response = await client.GetAsync(url);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string json = await response.Content.ReadAsStringAsync();
+
+                        var opciones = new JsonSerializerOptions
+                        {
+                            PropertyNameCaseInsensitive = true //ignora les majuscules/minuscules a l'hora d'emaprellar-lo amb la calsse.
+
+                        };
+                        var canciones = JsonSerializer.Deserialize<List<Canco>>(json, opciones);
+
+
+                        dgUsers.ItemsSource = canciones; // Aqui emplenem el DataGrid
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al obtener los datos de la API");
+                    }
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show($"Error de red: {ex.Message}");
+            }
+        }
+
         private void Enrrere_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainwindow = new MainWindow();
+            MainWindow main = new MainWindow();
             this.Close();
-            mainwindow.Show();
+            main.Show();
         }
     }
 }
