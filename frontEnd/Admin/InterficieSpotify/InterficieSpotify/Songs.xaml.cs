@@ -14,28 +14,32 @@ namespace InterficieSpotify
             InitializeComponent();
         }
 
-        // 🔹 Evento del botón "CarregarDades"
         private async void CarregarDades_Click(object sender, RoutedEventArgs e)
         {
             await CargarCancionesAsync();
         }
 
-        // 🔹 Método para llamar a la API y llenar el DataGrid
         private async Task CargarCancionesAsync()
         {
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    string url = "  http://localhost:5000/cancons"; // Tu API real
+                    string url = "  http://localhost:5000/cancons"; 
                     var response = await client.GetAsync(url);
 
                     if (response.IsSuccessStatusCode)
                     {
                         string json = await response.Content.ReadAsStringAsync();
-                        var canciones = JsonSerializer.Deserialize<List<Canco>>(json);
 
-                        dgSongs.ItemsSource = canciones; // Llenamos el DataGrid
+                        var opciones = new JsonSerializerOptions
+                        {
+                            PropertyNameCaseInsensitive = true
+                        };
+                        var canciones = JsonSerializer.Deserialize<List<Canco>>(json, opciones);
+
+
+                        dgSongs.ItemsSource = canciones; // Aqui emplenem el DataGrid
                     }
                     else
                     {
@@ -49,7 +53,6 @@ namespace InterficieSpotify
             }
         }
 
-        // 🔹 Botón "Enrrere" para volver al MainWindow
         private void Enrrere_Click(object sender, RoutedEventArgs e)
         {
             MainWindow main = new MainWindow();
