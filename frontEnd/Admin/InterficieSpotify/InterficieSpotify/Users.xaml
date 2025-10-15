@@ -7,10 +7,14 @@
         mc:Ignorable="d"
         Title="Users" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="37*"/>
-            <ColumnDefinition Width="418*"/>
-            <ColumnDefinition Width="345*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -18,7 +22,17 @@
                 <GradientStop Color="White" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Button x:Name="Enrrere" Content="🔙" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="Enrrere_Click" Background="{x:Null}" Height="38" Width="50" FontSize="20" BorderBrush="{x:Null}" Grid.ColumnSpan="2"/>
+        <Button x:Name="Enrrere" Content="🔙" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="Enrrere_Click" Background="{x:Null}" Height="38" Width="50" FontSize="20" BorderBrush="{x:Null}" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <Button x:Name="CarregarDades" Content="CarregarDades" HorizontalAlignment="Left" Margin="568,29,0,0" VerticalAlignment="Top" Click="CarregarDades_Click" Height="44" Width="172" FontSize="22" Grid.ColumnSpan="2" Grid.Row="1">
+            <Button.Background>
+                <ImageBrush/>
+            </Button.Background>
+        </Button>
+        <DataGrid x:Name="dgUsers" 
+          AutoGenerateColumns="True"
+          IsReadOnly="True"
+          VerticalAlignment="Top"
+          Height="316" Margin="48,94,48,0" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
 
     </Grid>
 </Window>
