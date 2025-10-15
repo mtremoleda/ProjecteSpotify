@@ -58,11 +58,6 @@ namespace ApiSpotify.ENDPOINTS
                 DAOUsuari.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
         }
     }
-
-
-
-
-
 }
     
 
