@@ -8,7 +8,11 @@ namespace ApiSpotify.ENDPOINTS
     {
         public static void MapUsuarisEndpoints(this WebApplication app, DatabaseConnection dbConn)
         {
-            
+            app.MapGet("/usuaris", () =>
+            {
+                List<Usuari> usuaris = DAOUsuari.GetAll(dbConn);
+                return Results.Ok(usuaris);
+            });
 
         }
     }
