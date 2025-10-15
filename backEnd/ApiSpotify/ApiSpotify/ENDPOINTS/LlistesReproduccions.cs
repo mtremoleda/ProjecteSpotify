@@ -1,6 +1,13 @@
-﻿namespace ApiSpotify.ENDPOINTS
+﻿using ApiSpotify.Services;
+
+namespace ApiSpotify.ENDPOINTS
 {
-    public class LlistesReproduccions
+    public static class LlistesReproduccions
     {
+        public static void MapLlistesReproduccionsEndpoints(this WebApplication app, DatabaseConnection dbConn)
+        {
+
+
+        }
     }
 }

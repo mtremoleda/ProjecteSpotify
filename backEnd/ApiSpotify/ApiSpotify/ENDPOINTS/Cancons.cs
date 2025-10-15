@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ApiSpotify.MODELS;
 using ApiSpotify.REPOSITORY;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ApiSpotify.ENDPOINTS
 {
@@ -32,7 +33,7 @@ namespace ApiSpotify.ENDPOINTS
             });
 
             // POST /cancons
-            app.MapPost("/InsertCancons", (CancoRequest req) =>
+            app.MapPost("/InsertCancons", ([FromBody] CancoRequest req) =>
             {
                 Canco canco = new Canco
                 {

@@ -1,6 +1,13 @@
-﻿namespace ApiSpotify.ENDPOINTS
+﻿using ApiSpotify.Services;
+
+namespace ApiSpotify.ENDPOINTS
 {
-    public class QualitatsFitxers
+    public static class QualitatsFitxers
     {
+        public static void MapQualitatsFitxersEndpoints(this WebApplication app, DatabaseConnection dbConn)
+        {
+
+
+        }
     }
 }
