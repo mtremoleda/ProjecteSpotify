@@ -69,9 +69,12 @@ namespace ApiSpotify.ENDPOINTS
                 DAOCanco.Update(dbConn, updated);
                 return Results.Ok(updated);
             });
+
+            app.MapDelete("/cancons/{id}", (Guid id) =>
+                DAOCanco.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
+        
         }
     }
-
 }
 
     // DTO pel request
