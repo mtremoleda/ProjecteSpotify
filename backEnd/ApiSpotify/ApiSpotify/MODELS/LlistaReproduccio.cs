@@ -6,6 +6,5 @@
         public Guid IdUsuari { get; set; }
         public string Nom { get; set; }
 
-        public ICollection<LlistaReproduccioCanco> Cancons { get; set; }
     }
 }

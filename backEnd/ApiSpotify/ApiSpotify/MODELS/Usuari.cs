@@ -7,6 +7,5 @@
         public string Contrasenya { get; set; }
         public string Salt { get; set; }
 
-        public ICollection<LlistaReproduccio> LlistesReproduccio { get; set; }
     }
 }

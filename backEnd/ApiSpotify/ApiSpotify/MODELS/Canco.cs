@@ -8,7 +8,5 @@
         public string Album { get; set; }
         public decimal? Durada { get; set; }
 
-        public ICollection<QualitatFitxer> QualitatsFitxer { get; set; }
-        public ICollection<LlistaReproduccioCanco> Llistes { get; set; }
     }
 }
