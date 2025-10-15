@@ -13,7 +13,7 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = @"INSERT INTO QualitatFitxer (Id, IdCanco, Format, Bitrate, Mida)
+            string sql = @"INSERT INTO Files_quality (Id, IdCanco, Format, Bitrate, Mida)
                            VALUES (@Id, @IdCanco, @Format, @Bitrate, @Mida)";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
@@ -34,7 +34,7 @@ namespace ApiSpotify.REPOSITORY
             List<QualitatFitxer> fitxers = new();
             dbConn.Open();
 
-            string sql = "SELECT Id, IdCanco, Format, Bitrate, Mida FROM QualitatFitxer";
+            string sql = "SELECT Id, IdCanco, Format, Bitrate, Mida FROM Files_quality";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             using SqlDataReader reader = cmd.ExecuteReader();
@@ -59,7 +59,7 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = "SELECT Id, IdCanco, Format, Bitrate, Mida FROM QualitatFitxer WHERE Id = @Id";
+            string sql = "SELECT Id, IdCanco, Format, Bitrate, Mida FROM Files_quality WHERE Id = @Id";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", id);
@@ -87,7 +87,7 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = @"UPDATE QualitatFitxer
+            string sql = @"UPDATE Files_quality
                            SET
                                Bitrate = @Bitrate,
                                Format = @Format
@@ -108,7 +108,7 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = @"DELETE FROM QualitatFitxer WHERE Id = @Id";
+            string sql = @"DELETE FROM Files_quality WHERE Id = @Id";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", id);
