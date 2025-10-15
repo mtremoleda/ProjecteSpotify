@@ -14,6 +14,15 @@ namespace ApiSpotify.ENDPOINTS
                 return Results.Ok(usuaris);
             });
 
+            app.MapGet("/usuaris/{id}", (Guid id) =>
+            {
+                Usuari? usuari = DAOUsuari.GetById(dbConn, id);
+                return usuari is not null
+                    ? Results.Ok(usuari)
+                    : Results.NotFound(new { message = $"Usuari amb Id {id} no trobat." });
+            });
+
+
         }
     }
 }
