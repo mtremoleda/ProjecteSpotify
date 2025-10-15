@@ -90,7 +90,6 @@ namespace ApiSpotify.REPOSITORY
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", rel.Id);
             cmd.Parameters.AddWithValue("@IdCanco", rel.IdCanco);
-            cmd.Parameters.AddWithValue("@Canco", rel.Canco);
             cmd.Parameters.AddWithValue("@IdLlista", rel.IdLlista);
 
             int rows = cmd.ExecuteNonQuery();
