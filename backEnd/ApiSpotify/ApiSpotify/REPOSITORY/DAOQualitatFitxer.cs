@@ -13,15 +13,15 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = @"INSERT INTO Files_quality (Id, IdCanco, Format, Bitrate, Mida)
-                           VALUES (@Id, @IdCanco, @Format, @Bitrate, @Mida)";
+            string sql = @"INSERT INTO Files_quality (Id, id_song, format, bitrate, mida)
+                           VALUES (@Id, @id_song, @format, @bitrate, @mida)";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", fitxer.Id);
-            cmd.Parameters.AddWithValue("@IdCanco", fitxer.IdCanco);
-            cmd.Parameters.AddWithValue("@Format", fitxer.Format);
-            cmd.Parameters.AddWithValue("@Bitrate", fitxer.Bitrate);
-            cmd.Parameters.AddWithValue("@Mida", fitxer.Mida);
+            cmd.Parameters.AddWithValue("@id_song", fitxer.IdCanco);
+            cmd.Parameters.AddWithValue("@format", fitxer.Format);
+            cmd.Parameters.AddWithValue("@bitrate", fitxer.Bitrate);
+            cmd.Parameters.AddWithValue("@mida", fitxer.Mida);
 
             int rows = cmd.ExecuteNonQuery();
             Console.WriteLine($"{rows} fila inserida.");
@@ -34,7 +34,7 @@ namespace ApiSpotify.REPOSITORY
             List<QualitatFitxer> fitxers = new();
             dbConn.Open();
 
-            string sql = "SELECT Id, IdCanco, Format, Bitrate, Mida FROM Files_quality";
+            string sql = "SELECT Id, id_song, format, bitrate, mida FROM Files_quality";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             using SqlDataReader reader = cmd.ExecuteReader();
@@ -59,7 +59,7 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = "SELECT Id, IdCanco, Format, Bitrate, Mida FROM Files_quality WHERE Id = @Id";
+            string sql = "SELECT Id, id_song, format, bitrate, mida FROM Files_quality WHERE Id = @Id";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", id);
@@ -89,14 +89,14 @@ namespace ApiSpotify.REPOSITORY
 
             string sql = @"UPDATE Files_quality
                            SET
-                               Bitrate = @Bitrate,
-                               Format = @Format
+                               bitrate = @bitrate,
+                               format = @format
                            WHERE Id = @Id";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", qualitat.Id);
-            cmd.Parameters.AddWithValue("@Bitrate", qualitat.Bitrate);
-            cmd.Parameters.AddWithValue("@Format", qualitat.Format);
+            cmd.Parameters.AddWithValue("@bitrate", qualitat.Bitrate);
+            cmd.Parameters.AddWithValue("@format", qualitat.Format);
 
             int rows = cmd.ExecuteNonQuery();
             Console.WriteLine($"{rows} fila actualitzada.");
