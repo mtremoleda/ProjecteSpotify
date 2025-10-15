@@ -21,7 +21,7 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="Cancons" Content="Songs" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="103,238,0,0" VerticalAlignment="Top" Click="Button_Click_1" Height="41" Width="140">
+        <Button x:Name="Cancons" Content="Songs" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="95,238,0,0" VerticalAlignment="Top" Click="Button_Click_1" Height="41" Width="140">
             <Button.Background>
                 <ImageBrush/>
             </Button.Background>
@@ -31,7 +31,7 @@
                 <ImageBrush/>
             </Button.Background>
         </Button>
-        <Button Content="PlayList" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="561,238,0,0" VerticalAlignment="Top" Height="41" Width="140" Click="Button_Click_2">
+        <Button Content="PlayList" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="560,238,0,0" VerticalAlignment="Top" Height="41" Width="140" Click="Button_Click_2">
             <Button.Background>
                 <ImageBrush/>
             </Button.Background>

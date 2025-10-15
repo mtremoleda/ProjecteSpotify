@@ -34,7 +34,8 @@ namespace InterficieSpotify
 
                         var opciones = new JsonSerializerOptions
                         {
-                            PropertyNameCaseInsensitive = true
+                            PropertyNameCaseInsensitive = true //ignora les majuscules/minuscules a l'hora d'emaprellar-lo amb la calsse.
+                                                                        
                         };
                         var canciones = JsonSerializer.Deserialize<List<Canco>>(json, opciones);
 
