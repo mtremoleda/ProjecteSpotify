@@ -1,5 +1,6 @@
 ﻿using ApiSpotify.Services;
 using Microsoft.Extensions.Configuration;
+using ApiSpotify.ENDPOINTS;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,6 @@ DatabaseConnection dbConn = new DatabaseConnection(connectionString);
 WebApplication webApp = builder.Build();
 
 // Registra els endpoints en un mètode separat
-webApp.MapProductEndpoints(dbConn);
+webApp.MapCancoEndpoints(dbConn);
 
 webApp.Run();

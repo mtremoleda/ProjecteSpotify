@@ -12,7 +12,7 @@ namespace ApiSpotify.ENDPOINTS
 {
     public static class EndpointCancons
     {
-        public static void MapProductEndpoints(this WebApplication app, DatabaseConnection dbConn)
+        public static void MapCancoEndpoints(this WebApplication app, DatabaseConnection dbConn)
         {
             // GET ALL
             app.MapGet("/cancons", () =>
@@ -32,7 +32,7 @@ namespace ApiSpotify.ENDPOINTS
             });
 
             // POST /cancons
-            app.MapPost("/cancons", (CancoRequest req) =>
+            app.MapPost("/InsertCancons", (CancoRequest req) =>
             {
                 Canco canco = new Canco
                 {
