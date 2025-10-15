@@ -36,11 +36,36 @@ namespace ApiSpotify.ENDPOINTS
                 return Results.Created($"/usuaris/{usuari.Id}", usuari);
             });
 
-        
+            app.MapPut("/usuaris/{id}", (Guid id, UsuariRequest req) =>
+            {
+                var existing = DAOUsuari.GetById(dbConn, id);
+                if (existing == null)
+                    return Results.NotFound();
 
+                Usuari updated = new Usuari
+                {
+                    Id = id,
+                    Nom = req.Nom,
+                    Contrasenya = req.Contrasenya,
+                    Salt = req.Salt
+                };
+
+                DAOUsuari.Update(dbConn, updated);
+                return Results.Ok(updated);
+            });
+
+            app.MapDelete("/usuaris/{id}", (Guid id) =>
+                DAOUsuari.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
         }
     }
+
+
+
+
+
 }
+    
+
 
 public record UsuariRequest(string Nom, string Contrasenya, string Salt);
 
