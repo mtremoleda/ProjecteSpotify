@@ -81,7 +81,7 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = @"UPDATE LlistaReproduccioCanco
+            string sql = @"UPDATE Playlist_songs
                            SET LlistaId = @LlistaId,
                                CancoId = @CancoId,
                                Ordre = @Ordre
@@ -97,6 +97,22 @@ namespace ApiSpotify.REPOSITORY
             Console.WriteLine($"{rows} fila actualitzada.");
 
             dbConn.Close();
+        }
+        
+        public static bool Delete(DatabaseConnection dbConn, Guid id)
+        {
+            dbConn.Open();
+
+            string sql = @"DELETE FROM Playlist_song WHERE Id = @Id";
+
+            using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+            cmd.Parameters.AddWithValue("@Id", id);
+
+            int rows = cmd.ExecuteNonQuery();
+
+            dbConn.Close();
+
+            return rows > 0;
         }
     }
 }
