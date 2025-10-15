@@ -28,5 +28,31 @@ namespace ApiSpotify.REPOSITORY
 
             dbConn.Close();
         }
+
+        public static List<QualitatFitxer> GetAll(DatabaseConnection dbConn)
+        {
+            List<QualitatFitxer> fitxers = new();
+            dbConn.Open();
+
+            string sql = "SELECT Id, IdCanco, Format, Bitrate, Mida FROM QualitatFitxer";
+
+            using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+            using SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                fitxers.Add(new QualitatFitxer
+                {
+                    Id = reader.GetGuid(0),
+                    IdCanco = reader.GetGuid(1),
+                    Format = reader.GetString(2),
+                    Bitrate = reader.IsDBNull(3) ? null : reader.GetInt32(3),
+                    Mida = reader.IsDBNull(4) ? null : reader.GetDecimal(4)
+                });
+            }
+
+            dbConn.Close();
+            return fitxers;
+        }
     }
 }
