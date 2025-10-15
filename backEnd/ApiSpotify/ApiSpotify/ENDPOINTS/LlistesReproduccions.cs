@@ -23,6 +23,20 @@ namespace ApiSpotify.ENDPOINTS
                     : Results.NotFound(new { message = $"Playlist amb Id {id} no trobada." });
             });
 
+            app.MapPost("/playlists", (LlistaRequest req) =>
+            {
+                LlistaReproduccio llista = new LlistaReproduccio
+                {
+                    Id = Guid.NewGuid(),
+                    IdUsuari = req.IdUser,
+                    Nom = req.Nom
+                };
+
+                DAOLlistaReproduccio.Insert(dbConn, llista);
+                return Results.Created($"/playlists/{llista.Id}", llista);
+            });
         }
     }
 }
+
+public record LlistaRequest(Guid IdUser, string Nom);
