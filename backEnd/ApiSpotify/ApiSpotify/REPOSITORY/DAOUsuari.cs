@@ -79,5 +79,28 @@ namespace ApiSpotify.REPOSITORY
             dbConn.Close();
             return usuari;
         }
+
+        public static void Update(DatabaseConnection dbConn, Usuari usuari)
+        {
+            dbConn.Open();
+
+            string sql = @"UPDATE Usuari
+                           SET Nom = @Nom,
+                               Contrasenya = @Contrasenya,
+                               Salt = @Salt
+                           WHERE Id = @Id";
+
+            using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+            cmd.Parameters.AddWithValue("@Id", usuari.Id);
+            cmd.Parameters.AddWithValue("@Nom", usuari.Nom);
+            cmd.Parameters.AddWithValue("@Contrasenya", usuari.Contrasenya);
+            cmd.Parameters.AddWithValue("@Salt", usuari.Salt);
+
+
+            int rows = cmd.ExecuteNonQuery();
+            Console.WriteLine($"{rows} fila actualitzada.");
+
+            dbConn.Close();
+        }
     }
 }

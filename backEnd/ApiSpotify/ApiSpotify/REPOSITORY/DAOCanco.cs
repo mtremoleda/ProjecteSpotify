@@ -77,7 +77,7 @@ namespace ApiSpotify.REPOSITORY
                     Titol = reader.GetString(1),
                     Artista = reader.GetString(2),
                     Album = reader.GetString(3),
-                    Durada = reader.GetDecimal(64),
+                    Durada = reader.GetDecimal(4),
                 };
             };
 
