@@ -16,15 +16,15 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = @"INSERT INTO Song (Id, Titol, Artista, Album, Durada)
+            string sql = @"INSERT INTO Songs (Id, titol, artista, album, durada)
                           VALUES (@Id, @titol, @artista, @album, @durada)";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", canco.Id);
-            cmd.Parameters.AddWithValue("@Titol", canco.Titol);
-            cmd.Parameters.AddWithValue("@Artista", canco.Artista);
-            cmd.Parameters.AddWithValue("@Album", canco.Album);
-            cmd.Parameters.AddWithValue("@Durada", canco.Durada);
+            cmd.Parameters.AddWithValue("@titol", canco.Titol);
+            cmd.Parameters.AddWithValue("@artista", canco.Artista);
+            cmd.Parameters.AddWithValue("@album", canco.Album);
+            cmd.Parameters.AddWithValue("@durada", canco.Durada);
 
             int rows = cmd.ExecuteNonQuery();
             Console.WriteLine($"{rows} fila inserida.");
@@ -61,7 +61,7 @@ namespace ApiSpotify.REPOSITORY
         public static Canco GetById(DatabaseConnection dbConn, Guid id)
         {
             dbConn.Open();
-            string sql = "SELECT Id, Titol, Artista, Album, Durada FROM Song";
+            string sql = "SELECT Id, titol, artista, album, durada FROM Songs";
 
             using SqlCommand cmd = new SqlCommand( sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", id);
@@ -89,19 +89,19 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = @"UPDATE Song
-                           SET Titol = @Titol,
-                               Artista = @Artista,
-                               Album = @Album,
-                               Durada = @Durada
+            string sql = @"UPDATE Songs
+                           SET titol = @titol,
+                               artista = @artista,
+                               album = @album,
+                               durada = @durada
                            WHERE Id = @Id";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", canco.Id);
-            cmd.Parameters.AddWithValue("@Titol", canco.Titol);
-            cmd.Parameters.AddWithValue("@Artista", canco.Artista);
-            cmd.Parameters.AddWithValue("@Album", canco.Album);
-            cmd.Parameters.AddWithValue("@Durada", canco.Durada);
+            cmd.Parameters.AddWithValue("@titol", canco.Titol);
+            cmd.Parameters.AddWithValue("@artista", canco.Artista);
+            cmd.Parameters.AddWithValue("@album", canco.Album);
+            cmd.Parameters.AddWithValue("@durada", canco.Durada);
 
             int rows = cmd.ExecuteNonQuery();
             Console.WriteLine($"{rows} fila actualitzada.");
@@ -113,7 +113,7 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = @"DELETE FROM Song WHERE Id = @Id";
+            string sql = @"DELETE FROM Songs WHERE Id = @Id";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", id);
