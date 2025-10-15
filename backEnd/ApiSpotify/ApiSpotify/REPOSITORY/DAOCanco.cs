@@ -16,7 +16,7 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = @"INSERT INTO Canco (Id, Titol, Artista, Album, Durada)
+            string sql = @"INSERT INTO Song (Id, Titol, Artista, Album, Durada)
                           VALUES (@Id, @titol, @artista, @album, @durada)";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
@@ -37,7 +37,7 @@ namespace ApiSpotify.REPOSITORY
 
             dbconn.Open();
 
-            string sql = "SELECT Id, Titol, Artista, Album, Durada FROM Canco";
+            string sql = "SELECT Id, titol, artista, album, durada FROM Songs";
 
             using SqlCommand cmd = new SqlCommand(sql, dbconn.sqlConnection);
             using SqlDataReader reader = cmd.ExecuteReader();
@@ -50,7 +50,7 @@ namespace ApiSpotify.REPOSITORY
                     Titol = reader.GetString(1),
                     Artista = reader.GetString(2),
                     Album = reader.GetString(3),
-                    Durada = reader.GetDecimal(64),
+                    Durada = reader.GetDecimal(4),
                 });
             }
 
@@ -61,7 +61,7 @@ namespace ApiSpotify.REPOSITORY
         public static Canco GetById(DatabaseConnection dbConn, Guid id)
         {
             dbConn.Open();
-            string sql = "SELECT Id, Titol, Artista, Album, Durada FROM Canco";
+            string sql = "SELECT Id, Titol, Artista, Album, Durada FROM Song";
 
             using SqlCommand cmd = new SqlCommand( sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", id);
@@ -89,7 +89,7 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = @"UPDATE Canco
+            string sql = @"UPDATE Song
                            SET Titol = @Titol,
                                Artista = @Artista,
                                Album = @Album,
@@ -113,7 +113,7 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = @"DELETE FROM Canco WHERE Id = @Id";
+            string sql = @"DELETE FROM Song WHERE Id = @Id";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", id);
