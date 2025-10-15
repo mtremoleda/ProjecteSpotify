@@ -13,14 +13,14 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = @"INSERT INTO Usuari (Id, Nom, Contrasenya, Salt)
-                           VALUES (@Id, @Nom, @Contrasenya, @Salt)";
+            string sql = @"INSERT INTO Users (Id, nom, contrasenya, salt)
+                           VALUES (@Id, @nom, @contrasenya, @salt)";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", usuari.Id);
-            cmd.Parameters.AddWithValue("@Nom", usuari.Nom);
-            cmd.Parameters.AddWithValue("@Contrasenya", usuari.Contrasenya);
-            cmd.Parameters.AddWithValue("@Salt", usuari.Salt);
+            cmd.Parameters.AddWithValue("@nom", usuari.Nom);
+            cmd.Parameters.AddWithValue("@contrasenya", usuari.Contrasenya);
+            cmd.Parameters.AddWithValue("@salt", usuari.Salt);
 
             int rows = cmd.ExecuteNonQuery();
             Console.WriteLine($"{rows} fila inserida.");
@@ -33,7 +33,7 @@ namespace ApiSpotify.REPOSITORY
             List<Usuari> usuaris = new();
             dbConn.Open();
 
-            string sql = "SELECT Id, Nom, Contrasenya, Salt FROM Usuari";
+            string sql = "SELECT Id, nom, contrasenya, salt FROM Users";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             using SqlDataReader reader = cmd.ExecuteReader();
@@ -57,7 +57,7 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = "SELECT Id, Nom, Contrasenya, Salt FROM Usuari WHERE Id = @Id";
+            string sql = "SELECT Id, nom, contrasenya, salt FROM Users WHERE Id = @Id";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", id);
