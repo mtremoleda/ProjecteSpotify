@@ -22,7 +22,25 @@ namespace ApiSpotify.ENDPOINTS
                     : Results.NotFound(new { message = $"Usuari amb Id {id} no trobat." });
             });
 
+            app.MapPost("/usuaris", (UsuariRequest req) =>
+            {
+                Usuari usuari = new Usuari
+                {
+                    Id = Guid.NewGuid(),
+                    Nom = req.Nom,
+                    Contrasenya = req.Contrasenya,
+                    Salt = req.Salt
+                };
+
+                DAOUsuari.Insert(dbConn, usuari);
+                return Results.Created($"/usuaris/{usuari.Id}", usuari);
+            });
+
+        
 
         }
     }
 }
+
+public record UsuariRequest(string Nom, string Contrasenya, string Salt);
+
