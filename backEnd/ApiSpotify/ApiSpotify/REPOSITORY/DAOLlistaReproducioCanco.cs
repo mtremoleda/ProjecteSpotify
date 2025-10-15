@@ -32,7 +32,7 @@ namespace ApiSpotify.REPOSITORY
             List<LlistaReproduccioCanco> relacions = new();
             dbConn.Open();
 
-            string sql = "SELECT Id, IdCanco, IdLlista FROM LlistaReproduccioCanco";
+            string sql = "SELECT Id, IdCanco, IdLlista FROM Playlist_song";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             using SqlDataReader reader = cmd.ExecuteReader();
@@ -49,6 +49,32 @@ namespace ApiSpotify.REPOSITORY
 
             dbConn.Close();
             return relacions;
+        }
+
+        public static LlistaReproduccioCanco? GetById(DatabaseConnection dbConn, Guid id)
+        {
+            dbConn.Open();
+
+            string sql = "SELECT Id, IdCanco, IdLlista FROM Playlist_song WHERE Id = @Id";
+
+            using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+            cmd.Parameters.AddWithValue("@Id", id);
+
+            using SqlDataReader reader = cmd.ExecuteReader();
+            LlistaReproduccioCanco? relacio = null;
+
+            if (reader.Read())
+            {
+                relacio = new LlistaReproduccioCanco
+                {
+                    Id = reader.GetGuid(0),
+                    IdCanco = reader.GetGuid(1),
+                    IdLlista = reader.GetGuid(2)
+                };
+            }
+
+            dbConn.Close();
+            return relacio;
         }
     }
 }
