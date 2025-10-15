@@ -16,5 +16,15 @@
             </LinearGradientBrush>
         </Grid.Background>
         <Button x:Name="Enrrere" Content="🔙" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="Enrrere_Click" Background="{x:Null}" Height="38" Width="50" FontSize="20" BorderBrush="{x:Null}"/>
+        <Button x:Name="CarregarDades" Content="CarregarDades" HorizontalAlignment="Left" Margin="548,17,0,0" VerticalAlignment="Top" Click="CarregarDades_Click" Height="44" Width="172" FontSize="22">
+            <Button.Background>
+                <ImageBrush/>
+            </Button.Background>
+        </Button>
+        <DataGrid x:Name="dgSongs" 
+                  AutoGenerateColumns="True"
+                  IsReadOnly="True"
+                  VerticalAlignment="Center"
+                  Height="224" Margin="94,0,94,0"/>
     </Grid>
 </Window>

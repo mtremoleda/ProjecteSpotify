@@ -8,8 +8,9 @@
         Title="Users" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="91*"/>
-            <ColumnDefinition Width="69*"/>
+            <ColumnDefinition Width="37*"/>
+            <ColumnDefinition Width="418*"/>
+            <ColumnDefinition Width="345*"/>
         </Grid.ColumnDefinitions>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -17,7 +18,7 @@
                 <GradientStop Color="White" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Button x:Name="Enrrere" Content="🔙" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="Enrrere_Click" Background="{x:Null}" Height="38" Width="50" FontSize="20" BorderBrush="{x:Null}"/>
+        <Button x:Name="Enrrere" Content="🔙" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="Enrrere_Click" Background="{x:Null}" Height="38" Width="50" FontSize="20" BorderBrush="{x:Null}" Grid.ColumnSpan="2"/>
 
     </Grid>
 </Window>
