@@ -91,7 +91,6 @@ namespace ApiSpotify.REPOSITORY
             cmd.Parameters.AddWithValue("@Id", llista.Id);
             cmd.Parameters.AddWithValue("@Nom", llista.Nom);
             cmd.Parameters.AddWithValue("@IdUsuari", llista.IdUsuari);
-            cmd.Parameters.AddWithValue("@Usuari", llista.Usuari);
 
             int rows = cmd.ExecuteNonQuery();
             Console.WriteLine($"{rows} fila actualitzada.");
