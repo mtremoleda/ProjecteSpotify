@@ -13,7 +13,7 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = @"INSERT INTO LlistaReproduccio (Id, IdUsuari, Nom)
+            string sql = @"INSERT INTO Playlist (Id, IdUsuari, Nom)
                            VALUES (@Id, @IdUsuari, @Nom)";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
@@ -32,7 +32,7 @@ namespace ApiSpotify.REPOSITORY
             List<LlistaReproduccio> llistes = new();
             dbConn.Open();
 
-            string sql = "SELECT Id, IdUsuari, Nom FROM Playlist_song";
+            string sql = "SELECT Id, IdUsuari, Nom FROM Playlist";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             using SqlDataReader reader = cmd.ExecuteReader();

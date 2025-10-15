@@ -1,5 +1,4 @@
-﻿using ApiSpotify.Models;
-using ApiSpotify.MODELS;
+﻿using ApiSpotify.MODELS;
 using ApiSpotify.Services;
 using Microsoft.Data.SqlClient;
 using System;
@@ -14,7 +13,7 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = @"INSERT INTO LlistaReproduccioCanco (Id, IdCanco, IdLlista)
+            string sql = @"INSERT INTO Playlist_song (Id, IdCanco, IdLlista)
                            VALUES (@Id, @IdCanco, @IdLlista)";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
