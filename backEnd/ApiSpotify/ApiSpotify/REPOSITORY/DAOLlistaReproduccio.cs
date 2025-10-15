@@ -55,7 +55,7 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = "SELECT Id, IdUsuari, Nom FROM LlistaReproduccio WHERE Id = @Id FROM Playlist";
+            string sql = "SELECT Id, IdUsuari, Nom FROM Playlist WHERE Id = @Id FROM Playlist";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", id);
@@ -81,7 +81,7 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = @"UPDATE LlistaReproduccio
+            string sql = @"UPDATE Playlist
                            SET Nom = @Nom,
                                IdUsuari = @IdUsuari,
                                UsuariId = @UsuariId
@@ -103,7 +103,7 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = @"DELETE FROM LlistaReproduccio WHERE Id = @Id";
+            string sql = @"DELETE FROM Playlist WHERE Id = @Id";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", id);
