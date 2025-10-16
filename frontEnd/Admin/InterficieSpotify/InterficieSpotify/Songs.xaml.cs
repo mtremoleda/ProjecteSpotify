@@ -57,6 +57,7 @@ namespace InterficieSpotify
             }
         }
 
+        
         private void Enrrere_Click(object sender, RoutedEventArgs e)
         {
             MainWindow main = new MainWindow();

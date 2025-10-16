@@ -56,7 +56,6 @@ namespace ApiSpotify.ENDPOINTS
                                     Durada = (decimal)props.Duration.TotalSeconds
                                 };
 
-                                //TODO: Fer Add a la BD
                                 canconsProcessades.Add(canco);
                             }
                         }
