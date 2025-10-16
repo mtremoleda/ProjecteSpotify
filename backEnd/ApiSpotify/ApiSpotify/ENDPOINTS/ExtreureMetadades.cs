@@ -56,7 +56,7 @@ namespace ApiSpotify.ENDPOINTS
                                     Durada = (decimal)props.Duration.TotalSeconds
                                 };
 
-
+                                //TODO: Fer Add a la BD
                                 canconsProcessades.Add(canco);
                             }
                         }
@@ -64,7 +64,18 @@ namespace ApiSpotify.ENDPOINTS
                         {
                             Console.WriteLine($"Error processant {file.FileName}: {ex.Message}");
                         }
-                        
+                        finally
+                        {
+                            try
+                            {
+                                if (!string.IsNullOrEmpty(tempPath) && System.IO.File.Exists(tempPath))
+                                    System.IO.File.Delete(tempPath);
+                            }
+                            catch
+                            {
+                                Console.WriteLine($"No s'ha pogut eliminar el temporal {tempPath}");
+                            }
+                        }
                     });
                 });
 
