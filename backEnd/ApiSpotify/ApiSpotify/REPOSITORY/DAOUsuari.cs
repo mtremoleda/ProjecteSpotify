@@ -82,6 +82,16 @@ namespace ApiSpotify.REPOSITORY
 
         public static void Update(DatabaseConnection dbConn, Usuari usuari)
         {
+            using ApiSpotify.Utils; // 👈 afegeix això a dalt
+
+            // dins del mètode Insert (just abans de fer l’INSERT a la BD)
+            string salt = PasswordHelper.GenerateSalt();
+            string hashedPassword = PasswordHelper.HashPassword(usuari.Contrasenya, salt);
+
+            // i després, a l'SQL, guarda hashedPassword i salt
+            cmd.Parameters.AddWithValue("@contrasenya", hashedPassword);
+            cmd.Parameters.AddWithValue("@salt", salt);
+
             dbConn.Open();
 
             string sql = @"UPDATE Users
