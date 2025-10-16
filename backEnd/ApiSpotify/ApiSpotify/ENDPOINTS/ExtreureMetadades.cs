@@ -1,4 +1,5 @@
 ﻿using ApiSpotify.MODELS;
+using ApiSpotify.REPOSITORY;
 using ApiSpotify.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Concurrent;
@@ -42,7 +43,22 @@ namespace ApiSpotify.ENDPOINTS
                                 Durada = (decimal)props.Duration.TotalSeconds
                             };
 
+                            // Desa a la BD (si vols)
+                            DAOCanco.Insert(dbConn, canco);
+
+                            canconsProcessades.Add(canco);
+
+                            tagFile.Dispose();
                         }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Error processant {file.FileName}: {ex.Message}");
+                        }
+                    });
+                });
+
+                return Results.Ok(canconsProcessades);
+            });
         }
     
     }
