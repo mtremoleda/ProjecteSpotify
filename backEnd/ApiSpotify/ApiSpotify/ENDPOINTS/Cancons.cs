@@ -33,7 +33,7 @@ namespace ApiSpotify.ENDPOINTS
             });
 
             // POST /cancons
-            app.MapPost("/InsertCancons", ([FromBody] CancoRequest req) =>
+            app.MapPost("/Cancons", ([FromBody] CancoRequest req) =>
             {
                 Canco canco = new Canco
                 {

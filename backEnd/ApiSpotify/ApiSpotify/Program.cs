@@ -26,6 +26,8 @@ using Microsoft.OpenApi.Models;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
+
+
 // Configuració
 builder.Configuration
     .SetBasePath(AppContext.BaseDirectory)
@@ -49,6 +51,8 @@ DatabaseConnection dbConn = new DatabaseConnection(connectionString);
 
 WebApplication webApp = builder.Build();
 
+//webApp.UseAntiforgery();
+
 // Activem Swagger només en desenvolupament
 if (webApp.Environment.IsDevelopment())
 {
@@ -66,6 +70,7 @@ webApp.MapUsuarisEndpoints(dbConn);
 webApp.MapLlistesReproduccionsEndpoints(dbConn);
 webApp.MapLlistareproduccioCancoEndpointsEndpoints(dbConn);
 webApp.MapQualitatsFitxersEndpoints(dbConn);
+webApp.MapExtreureMetadadesEndpoints(dbConn);
 
 webApp.Run();
 
