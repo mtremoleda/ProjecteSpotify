@@ -2,6 +2,7 @@
 using ApiSpotify.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Concurrent;
+using TagLib;
 
 namespace ApiSpotify.ENDPOINTS
 {
@@ -21,7 +22,27 @@ namespace ApiSpotify.ENDPOINTS
                 // Processar amb un màxim de 2 fils
                 var options = new ParallelOptions { MaxDegreeOfParallelism = 2 };
 
-            });
+                await Task.Run(() =>
+                {
+                    Parallel.ForEach(files, options, file =>
+                    {
+                        try
+                        {
+                            using var stream = file.OpenReadStream();
+                            var tagFile = TagLib.File.Create(new TagLib.StreamFileAbstraction(file.FileName, stream, stream));
+                            var tag = tagFile.Tag;
+                            var props = tagFile.Properties;
+
+                            var canco = new Canco
+                            {
+                                Id = Guid.NewGuid(),
+                                Titol = tag.Title ?? System.IO.Path.GetFileNameWithoutExtension(file.FileName),
+                                Artista = tag.Performers.Length > 0 ? tag.Performers[0] : "Desconegut",
+                                Album = tag.Album ?? "Desconegut",
+                                Durada = (decimal)props.Duration.TotalSeconds
+                            };
+
+                        }
         }
     
     }
