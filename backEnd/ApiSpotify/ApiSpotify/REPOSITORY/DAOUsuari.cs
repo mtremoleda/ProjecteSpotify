@@ -14,16 +14,18 @@ namespace ApiSpotify.REPOSITORY
             string salt = UTILS.UtilsContrasenya.GenerateSalt();
             string hashedPassword = UTILS.UtilsContrasenya.HashPassword(usuari.Contrasenya, salt);
 
+            
             dbConn.Open();
 
             string sql = @"INSERT INTO Users (Id, nom, contrasenya, salt)
                            VALUES (@Id, @nom, @contrasenya, @salt)";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+
             cmd.Parameters.AddWithValue("@Id", usuari.Id);
             cmd.Parameters.AddWithValue("@nom", usuari.Nom);
-            cmd.Parameters.AddWithValue("@contrasenya", usuari.Contrasenya);
-            cmd.Parameters.AddWithValue("@salt", usuari.Salt);
+            cmd.Parameters.AddWithValue("@contrasenya", hashedPassword);
+            cmd.Parameters.AddWithValue("@salt", salt);
 
             int rows = cmd.ExecuteNonQuery();
             Console.WriteLine($"{rows} fila inserida.");
@@ -101,8 +103,8 @@ namespace ApiSpotify.REPOSITORY
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", usuari.Id);
             cmd.Parameters.AddWithValue("@Nom", usuari.Nom);
-            cmd.Parameters.AddWithValue("@Contrasenya", usuari.Contrasenya);
-            cmd.Parameters.AddWithValue("@Salt", usuari.Salt);
+            cmd.Parameters.AddWithValue("@contrasenya", hashedPassword);
+            cmd.Parameters.AddWithValue("@salt", salt);
 
 
             int rows = cmd.ExecuteNonQuery();
