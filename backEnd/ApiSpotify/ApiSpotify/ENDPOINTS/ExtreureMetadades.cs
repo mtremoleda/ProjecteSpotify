@@ -4,6 +4,9 @@ using ApiSpotify.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Concurrent;
 using TagLib;
+using System.IO;
+using System.Threading.Tasks;
+using TagLib.Aac;
 
 namespace ApiSpotify.ENDPOINTS
 {
@@ -17,49 +20,16 @@ namespace ApiSpotify.ENDPOINTS
                 if (files == null || files.Count == 0)
                     return Results.BadRequest(new { message = "No s'ha rebut cap fitxer." });
 
-                // Col·lecció segura per a fils per guardar resultats
                 ConcurrentBag<Canco> canconsProcessades = new ConcurrentBag<Canco>();
 
-                // Processar amb un màxim de 2 fils
                 var options = new ParallelOptions { MaxDegreeOfParallelism = 2 };
 
-                await Task.Run(() =>
-                {
-                    Parallel.ForEach(files, options, file =>
-                    {
-                        try
-                        {
-                            using var stream = file.OpenReadStream();
-                            var tagFile = TagLib.File.Create(new TagLib.StreamFileAbstraction(file.FileName, stream, stream));
-                            var tag = tagFile.Tag;
-                            var props = tagFile.Properties;
+                // Transformem la col·lecció a una llista per a poder-la iterar en Parallel.ForEach
+                var fileList = files.ToList();
 
-                            var canco = new Canco
-                            {
-                                Id = Guid.NewGuid(),
-                                Titol = tag.Title ?? System.IO.Path.GetFileNameWithoutExtension(file.FileName),
-                                Artista = tag.Performers.Length > 0 ? tag.Performers[0] : "Desconegut",
-                                Album = tag.Album ?? "Desconegut",
-                                Durada = (decimal)props.Duration.TotalSeconds
-                            };
+                
 
-                            // Desa a la BD (si vols)
-                            DAOCanco.Insert(dbConn, canco);
-
-                            canconsProcessades.Add(canco);
-
-                            tagFile.Dispose();
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine($"Error processant {file.FileName}: {ex.Message}");
-                        }
-                    });
-                });
-
-                return Results.Ok(canconsProcessades);
-            });
         }
-    
+
     }
 }

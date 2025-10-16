@@ -26,6 +26,8 @@ using Microsoft.OpenApi.Models;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
+
+
 // Configuració
 builder.Configuration
     .SetBasePath(AppContext.BaseDirectory)
@@ -48,6 +50,8 @@ string connectionString = builder.Configuration.GetConnectionString("DefaultConn
 DatabaseConnection dbConn = new DatabaseConnection(connectionString);
 
 WebApplication webApp = builder.Build();
+
+//webApp.UseAntiforgery();
 
 // Activem Swagger només en desenvolupament
 if (webApp.Environment.IsDevelopment())
