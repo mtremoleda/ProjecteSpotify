@@ -64,5 +64,10 @@ namespace InterficieSpotify
             this.Close();
             main.Show();
         }
+
+        private void dgSongs_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

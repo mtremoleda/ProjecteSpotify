@@ -16,16 +16,19 @@ namespace InterficieSpotify
 
         private async void CarregarDades_Click(object sender, RoutedEventArgs e)
         {
-            await CargarCancionesAsync();
+            await CargarUsuarisAsync();
         }
 
-        private async Task CargarCancionesAsync()
+        private async Task CargarUsuarisAsync()
         {
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    string url = "http://localhost:56833/users";
+                    string url = "https://localhost:56832/usuaris";
+
+                    
+
                     var response = await client.GetAsync(url);
 
                     if (response.IsSuccessStatusCode)
@@ -37,10 +40,10 @@ namespace InterficieSpotify
                             PropertyNameCaseInsensitive = true //ignora les majuscules/minuscules a l'hora d'emaprellar-lo amb la calsse.
 
                         };
-                        var canciones = JsonSerializer.Deserialize<List<Canco>>(json, opciones);
+                        var usuaris = JsonSerializer.Deserialize<List<Usuari>>(json, opciones);
 
 
-                        dgUsers.ItemsSource = canciones; // Aqui emplenem el DataGrid
+                        dgUsers.ItemsSource = usuaris; // Aqui emplenem el DataGrid
                     }
                     else
                     {

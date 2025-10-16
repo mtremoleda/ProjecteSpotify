@@ -27,6 +27,6 @@
                   AutoGenerateColumns="True"
                   IsReadOnly="True"
                   VerticalAlignment="Top"
-                  Height="316" Margin="18,90,18,0"/>
+                  Height="316" Margin="18,90,18,0" SelectionChanged="dgSongs_SelectionChanged"/>
     </Grid>
 </Window>
