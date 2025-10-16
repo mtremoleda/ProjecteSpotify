@@ -84,7 +84,7 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = @"UPDATE Usuari
+            string sql = @"UPDATE Users
                            SET Nom = @Nom,
                                Contrasenya = @Contrasenya,
                                Salt = @Salt
@@ -107,7 +107,7 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = @"DELETE FROM Usuari WHERE Id = @Id";
+            string sql = @"DELETE FROM Users WHERE Id = @Id";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", id);
