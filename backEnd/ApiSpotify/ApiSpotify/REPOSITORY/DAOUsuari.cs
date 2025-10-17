@@ -14,7 +14,7 @@ namespace ApiSpotify.REPOSITORY
             string salt = UTILS.UtilsContrasenya.GenerateSalt();
             string hashedPassword = UTILS.UtilsContrasenya.HashPassword(usuari.Contrasenya, salt);
 
-            
+
             dbConn.Open();
 
             string sql = @"INSERT INTO Users (Id, nom, contrasenya, salt)
@@ -87,11 +87,11 @@ namespace ApiSpotify.REPOSITORY
 
         public static void Update(DatabaseConnection dbConn, Usuari usuari)
         {
-            
+
             string salt = UTILS.UtilsContrasenya.GenerateSalt();
             string hashedPassword = UTILS.UtilsContrasenya.HashPassword(usuari.Contrasenya, salt);
 
-            
+
             dbConn.Open();
 
             string sql = @"UPDATE Users
