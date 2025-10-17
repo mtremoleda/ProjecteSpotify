@@ -9,13 +9,10 @@ namespace ApiSpotify.REPOSITORY
 {
     public class DAOUsuari
     {
-        public static void Insert(DatabaseConnection dbConn, Usuari usuari)
+        public static void Insert(DatabaseConnection dbConn, Usuari usuari, string salt)
         {
-            string salt = UTILS.UtilsContrasenya.GenerateSalt();
-            string hashedPassword = UTILS.UtilsContrasenya.HashPassword(usuari.Contrasenya, salt);
 
-
-            dbConn.Open();
+            //dbConn.Open();
 
             string sql = @"INSERT INTO Users (Id, nom, contrasenya, salt)
                            VALUES (@Id, @nom, @contrasenya, @salt)";
@@ -24,13 +21,13 @@ namespace ApiSpotify.REPOSITORY
 
             cmd.Parameters.AddWithValue("@Id", usuari.Id);
             cmd.Parameters.AddWithValue("@nom", usuari.Nom);
-            cmd.Parameters.AddWithValue("@contrasenya", hashedPassword);
+            cmd.Parameters.AddWithValue("@contrasenya", usuari.Contrasenya);
             cmd.Parameters.AddWithValue("@salt", salt);
 
             int rows = cmd.ExecuteNonQuery();
             Console.WriteLine($"{rows} fila inserida.");
 
-            dbConn.Close();
+            //dbConn.Close();
         }
 
         public static List<Usuari> GetAll(DatabaseConnection dbConn)

@@ -40,6 +40,12 @@ namespace ApiSpotify.UTILS
             string enteredHash = HashPassword(enteredPassword, salt);
             return storedHash == enteredHash;
         }
+
+        public static string GenerarPassword(string enteredPassword, string storedHash)
+        {
+            string salt = GenerateSalt();
+            string hashedPassword = HashPassword(req.Contrasenya, salt);
+        }
     }
 }
 

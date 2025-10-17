@@ -24,20 +24,24 @@ namespace ApiSpotify.ENDPOINTS
 
             app.MapPost("/usuaris", (UsuariRequest req) =>
             {
+                string salt = UTILS.UtilsContrasenya.GenerateSalt();
+                string hashedPassword = UTILS.UtilsContrasenya.HashPassword(req.Contrasenya, salt);
+
                 Usuari usuari = new Usuari
                 {
                     Id = Guid.NewGuid(),
                     Nom = req.Nom,
-                    Contrasenya = req.Contrasenya,
-                    Salt = req.Salt
+                    Contrasenya = hashedPassword,
                 };
 
-                DAOUsuari.Insert(dbConn, usuari);
+                DAOUsuari.Insert(dbConn, usuari, salt);
+                Console.WriteLine(usuari.Contrasenya);
                 return Results.Created($"/usuaris/{usuari.Id}", usuari);
             });
 
             app.MapPut("/usuaris/{id}", (Guid id, UsuariRequest req) =>
             {
+
                 var existing = DAOUsuari.GetById(dbConn, id);
                 if (existing == null)
                     return Results.NotFound();
@@ -47,7 +51,6 @@ namespace ApiSpotify.ENDPOINTS
                     Id = id,
                     Nom = req.Nom,
                     Contrasenya = req.Contrasenya,
-                    Salt = req.Salt
                 };
 
                 DAOUsuari.Update(dbConn, updated);
@@ -62,5 +65,5 @@ namespace ApiSpotify.ENDPOINTS
     
 
 
-public record UsuariRequest(string Nom, string Contrasenya, string Salt);
+public record UsuariRequest(string Nom, string Contrasenya);
 
