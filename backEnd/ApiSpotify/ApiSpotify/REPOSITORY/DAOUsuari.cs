@@ -12,7 +12,7 @@ namespace ApiSpotify.REPOSITORY
         public static void Insert(DatabaseConnection dbConn, Usuari usuari, string salt)
         {
 
-            //dbConn.Open();
+            dbConn.Open();
 
             string sql = @"INSERT INTO Users (Id, nom, contrasenya, salt)
                            VALUES (@Id, @nom, @contrasenya, @salt)";
@@ -27,7 +27,7 @@ namespace ApiSpotify.REPOSITORY
             int rows = cmd.ExecuteNonQuery();
             Console.WriteLine($"{rows} fila inserida.");
 
-            //dbConn.Close();
+            dbConn.Close();
         }
 
         public static List<Usuari> GetAll(DatabaseConnection dbConn)
