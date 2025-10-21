@@ -41,11 +41,7 @@ namespace ApiSpotify.UTILS
             return storedHash == enteredHash;
         }
 
-        public static string GenerarPassword(string enteredPassword, string storedHash)
-        {
-            string salt = GenerateSalt();
-            string hashedPassword = HashPassword(req.Contrasenya, salt);
-        }
+       
     }
 }
 
