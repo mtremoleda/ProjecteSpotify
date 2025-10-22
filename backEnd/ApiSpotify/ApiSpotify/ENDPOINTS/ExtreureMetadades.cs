@@ -57,6 +57,8 @@ namespace ApiSpotify.ENDPOINTS
                                 };
 
                                 canconsProcessades.Add(canco);
+
+                                //TODO: Es podria guardar canço a la base de dades
                             }
                         }
                         catch (Exception ex)
