@@ -56,7 +56,7 @@ namespace InterficieSpotify
                 MessageBox.Show($"Error de red: {ex.Message}");
             }
         }
-
+         
         private void Enrrere_Click(object sender, RoutedEventArgs e)
         {
             MainWindow main = new MainWindow();

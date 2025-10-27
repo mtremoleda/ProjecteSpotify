@@ -41,7 +41,6 @@ namespace ApiSpotify.UTILS
             return storedHash == enteredHash;
         }
 
-       
     }
 }
 
