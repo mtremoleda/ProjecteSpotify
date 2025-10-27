@@ -6,7 +6,7 @@ using ApiSpotify.MODELS;
 
 namespace ApiSpotify.DTO;
 
-    public record ProductRequest(string Titol, string Artista, string Album, Decimal Durada)
+    public record CanconsRequest(string Titol, string Artista, string Album, Decimal Durada)
     {
         // Guanyem CONTROL sobre com es fa la conversió
 
