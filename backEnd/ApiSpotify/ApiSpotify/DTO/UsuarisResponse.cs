@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ApiSpotify.MODELS;
 
-namespace ApiSpotify.DTO
+namespace ApiSpotify.DTO;
+
+public record UsuariResponse(Guid Id, string Nom)
 {
-    internal class UsuarisResponse
+    public static UsuariResponse FromUsuari(Usuari usuari)
     {
+        return new UsuariResponse(usuari.Id, usuari.Nom);
     }
 }
