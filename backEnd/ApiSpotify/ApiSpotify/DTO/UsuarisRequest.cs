@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ApiSpotify.MODELS;
 
-namespace ApiSpotify.DTO
+namespace ApiSpotify.DTO;
+
+public record UsuariRequest(string Nom, string Contrasenya)
 {
-    internal class UsuarisRequest
+    public Usuari ToUsuari(Guid id, string salt)
     {
+        return new Usuari
+        {
+            Id = id,
+            Nom = Nom,
+            Contrasenya = Contrasenya,
+            Salt = salt
+        };
     }
 }
