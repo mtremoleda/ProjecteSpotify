@@ -22,9 +22,9 @@ namespace ApiSpotify.ENDPOINTS
                 List<CanconsResponse> canconsResponses = new List<CanconsResponse>();
                 List<Canco> cancons = DAOCanco.GetAll(dbConn);
 
-                foreach (Canco p in cancons)
+                foreach (Canco c in cancons)
                 {
-                    canconsResponses.Add(CanconsResponse.FromProduct(p));
+                    canconsResponses.Add(CanconsResponse.FromProduct(c));
 
                 }
 
@@ -38,9 +38,11 @@ namespace ApiSpotify.ENDPOINTS
                 Canco? canco = DAOCanco.GetById(dbConn, id);
 
                 return canco is not null
-                    ? Results.Ok(canco)
+                    ? Results.Ok(CanconsResponse.FromProduct(canco))
                     : Results.NotFound(new { message = $"Canco with Id {id} not found." });
             });
+
+            
 
             // POST /cancons
             app.MapPost("/Cancons", ([FromBody] CancoRequest req) =>
