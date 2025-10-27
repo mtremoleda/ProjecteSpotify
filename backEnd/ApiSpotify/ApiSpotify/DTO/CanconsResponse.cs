@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+//Get
+using ApiSpotify.MODELS;
 
-namespace ApiSpotify.DTO
+namespace ApiSpotify.DTO;
+
+
+public record CanconsResponse(Guid Id, string Titol, string Artista, string Album, Decimal? Durada)
 {
-    internal class CanconsResponse
+    // Guanyem CONTROL sobre com es fa la conversió
+
+    public static CanconsResponse FromProduct(Canco canco)   // Conversió de model a response
     {
+        return new CanconsResponse(canco.Id, canco.Titol, canco.Artista, canco.Album, canco.Durada);
     }
 }
+
+
