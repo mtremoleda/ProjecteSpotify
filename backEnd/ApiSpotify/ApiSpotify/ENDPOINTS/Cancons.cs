@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using ApiSpotify.MODELS;
 using ApiSpotify.REPOSITORY;
 using Microsoft.AspNetCore.Mvc;
+using ApiSpotify.DTO;
 
 namespace ApiSpotify.ENDPOINTS
 {
@@ -18,8 +19,17 @@ namespace ApiSpotify.ENDPOINTS
             // GET ALL
             app.MapGet("/cancons", () =>
             {
+                List<CanconsResponse> canconsResponses = new List<CanconsResponse>();
                 List<Canco> cancons = DAOCanco.GetAll(dbConn);
-                return Results.Ok(cancons);
+
+                foreach (Canco p in cancons)
+                {
+                    canconsResponses.Add(CanconsResponse.FromProduct(p));
+
+                }
+
+                return Results.Ok(canconsResponses);
+
             });
 
             // GET BY ID
