@@ -1,6 +1,9 @@
-﻿using ApiSpotify.MODELS;
+﻿using ApiSpotify.DTO;
+using ApiSpotify.MODELS;
+using ApiSpotify.MODELS;
 using ApiSpotify.REPOSITORY;
 using ApiSpotify.Services;
+
 
 namespace ApiSpotify.ENDPOINTS
 {
@@ -8,17 +11,26 @@ namespace ApiSpotify.ENDPOINTS
     {
         public static void MapUsuarisEndpoints(this WebApplication app, DatabaseConnection dbConn)
         {
+            // GET /usuaris
             app.MapGet("/usuaris", () =>
             {
                 List<Usuari> usuaris = DAOUsuari.GetAll(dbConn);
-                return Results.Ok(usuaris);
+                List<UsuariResponse> usuariResponses = new List<UsuariResponse>();
+
+                foreach (Usuari u in usuaris)
+                {
+                    usuariResponses.Add(UsuariResponse.FromUsuari(u));
+                }
+
+                return Results.Ok(usuariResponses);
             });
 
             app.MapGet("/usuaris/{id}", (Guid id) =>
             {
                 Usuari? usuari = DAOUsuari.GetById(dbConn, id);
+
                 return usuari is not null
-                    ? Results.Ok(usuari)
+                    ? Results.Ok(UsuariResponse.FromUsuari(usuari))
                     : Results.NotFound(new { message = $"Usuari amb Id {id} no trobat." });
             });
 
