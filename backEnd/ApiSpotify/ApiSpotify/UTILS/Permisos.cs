@@ -1,18 +1,17 @@
 using ApiSpotify.MODELS;
-
+using System.Linq;
 
 public static class PermisosHelper
 {
+    // accio ha de ser exactament el nom del permís de la BD
     public static bool UsuariTePermis(Usuari usuari, string accio)
     {
-        // Els rols que vam definir abans
-        return usuari.Rol.Nom switch
-        {
-            "Administrador" => true, // té tots els permisos
-            "GestorContingut" => accio == "AfegirCanco" || accio == "EditarCanco" || accio == "EliminarCanco",
-            "Artista" => accio == "EditarPropiesCancons", // només pot editar les seves pròpies cançons
-            "Usuari" => accio == "EscoltarMusica", // només pot escoltar
-            _ => false
-        };
+        // Si és Administrador, té tots els permisos
+        if (usuari.Rol.Nom == "Administrador") return true;
+
+        
+        // Mirar si algun dels RolPermisos coincideix amb l'acció
+        return usuari.Rol.RolPermisos != null && usuari.Rol.RolPermisos.Any(rp => rp.Permiso.Nom == accio);
+
     }
 }
