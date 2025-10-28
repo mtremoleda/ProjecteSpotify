@@ -7,6 +7,12 @@
         public string Contrasenya { get; set; }
         public string Salt { get; set; }
 
+        
+        public int RolId { get; set; }
+
+        
+        public Rol Rol { get; set; }
+
     }
 }
 
