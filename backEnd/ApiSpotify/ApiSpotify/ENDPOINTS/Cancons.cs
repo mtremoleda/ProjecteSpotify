@@ -45,8 +45,15 @@ namespace ApiSpotify.ENDPOINTS
             
 
             // POST /cancons
-            app.MapPost("/Cancons", ([FromBody] CancoRequest req) =>
+            app.MapPost("/Cancons", ([FromBody] CancoRequest req, [FromQuery] Guid userId) =>
             {
+
+                Usuari usuari = DAOUsuari.GetByIdWithRol(dbConn, userId);
+                if (usuari == null) return Results.NotFound(new { message = "Usuari no trobat." });
+
+                if (!PermisosHelper.UsuariTePermis(usuari, "AfegirCanco"))
+                    return Results.Forbid();
+
                 Canco canco = new Canco
                 {
                     Id = Guid.NewGuid(),
