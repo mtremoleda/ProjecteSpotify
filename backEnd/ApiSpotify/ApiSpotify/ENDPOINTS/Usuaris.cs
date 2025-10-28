@@ -53,20 +53,23 @@ namespace ApiSpotify.ENDPOINTS
 
             app.MapPut("/usuaris/{id}", (Guid id, UsuariRequest req) =>
             {
-
                 var existing = DAOUsuari.GetById(dbConn, id);
                 if (existing == null)
-                    return Results.NotFound();
+                    return Results.NotFound(new { message = $"Usuari amb Id {id} no trobat." });
+
+                string newSalt = UTILS.UtilsContrasenya.GenerateSalt();
+                string hashedPassword = UTILS.UtilsContrasenya.HashPassword(req.Contrasenya, newSalt);
 
                 Usuari updated = new Usuari
                 {
                     Id = id,
                     Nom = req.Nom,
-                    Contrasenya = req.Contrasenya,
+                    Contrasenya = hashedPassword,
+                    Salt = newSalt
                 };
 
                 DAOUsuari.Update(dbConn, updated);
-                return Results.Ok(updated);
+                return Results.Ok(UsuariResponse.FromUsuari(updated));
             });
 
             app.MapDelete("/usuaris/{id}", (Guid id) =>
