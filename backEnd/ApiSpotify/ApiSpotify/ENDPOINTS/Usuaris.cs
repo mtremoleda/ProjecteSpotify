@@ -73,7 +73,9 @@ namespace ApiSpotify.ENDPOINTS
             });
 
             app.MapDelete("/usuaris/{id}", (Guid id) =>
-                DAOUsuari.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
+                DAOUsuari.Delete(dbConn, id)
+                    ? Results.NoContent()
+                    : Results.NotFound(new { message = $"Usuari amb Id {id} no trobat." }));
         }
     }
 }
