@@ -71,11 +71,19 @@ namespace ApiSpotify.ENDPOINTS
 
             });
 
-            app.MapPut("/cancons/{id}", (Guid id, CancoRequest req) =>
+            app.MapPut("/cancons/{id}", (Guid id, CancoRequest req, [FromQuery] Guid userId) =>
             {
                 var existing = DAOCanco.GetById(dbConn, id);
                 if (existing == null)
                     return Results.NotFound();
+
+                Usuari usuari = DAOUsuari.GetByIdWithRol(dbConn, userId);
+                if (usuari == null) return Results.NotFound(new { message = "Usuari no trobat." });
+
+                bool potEditar = PermisosHelper.UsuariTePermis(usuari, "EditarCanco") ||
+                                 (usuari.Rol.Nom == "Artista" && existing.Artista == usuari.Nom);
+
+                if (!potEditar) return Results.Forbid();
 
                 Canco updated = new Canco
                 {
