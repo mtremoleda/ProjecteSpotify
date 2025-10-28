@@ -125,5 +125,50 @@ namespace ApiSpotify.REPOSITORY
 
             return rows > 0;
         }
+
+
+        public static Usuari? GetByIdWithRol(DatabaseConnection dbConn, Guid id)
+        {
+            dbConn.Open();
+
+            string sql = @"
+                SELECT u.Id, u.Nom, u.Contrasenya, u.Salt, r.Id AS RolId, r.Nom AS RolNom
+                FROM Users u
+                JOIN Rols r ON u.RolId = r.Id
+                WHERE u.Id = @Id
+            ";
+
+            using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+            cmd.Parameters.AddWithValue("@Id", id);
+
+            using SqlDataReader reader = cmd.ExecuteReader();
+            Usuari? usuari = null;
+
+            if (reader.Read())
+            {
+                usuari = new Usuari
+                {
+                    Id = reader.GetGuid(0),
+                    Nom = reader.GetString(1),
+                    Contrasenya = reader.GetString(2),
+                    Salt = reader.GetString(3),
+                    RolId = reader.GetInt32(4),
+                    Rol = new Rol
+                    {
+                        Id = reader.GetInt32(4),
+                        Nom = reader.GetString(5)
+                    }
+                };
+            }
+
+            dbConn.Close();
+            return usuari;
+        }
+
+
+
+
+
+
     }
 }
