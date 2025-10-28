@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ApiSpotify.MODELS;
 
-namespace ApiSpotify.DTO
+namespace ApiSpotify.DTO;
+
+public record LlistaReproduccioRequest(Guid IdUsuari, string Nom)
 {
-    internal class LlistaReproduccionsRequest
+    public LlistaReproduccio ToLlistaReproduccio(Guid id)
     {
+        return new LlistaReproduccio
+        {
+            Id = id,
+            IdUsuari = IdUsuari,
+            Nom = Nom
+        };
     }
 }
