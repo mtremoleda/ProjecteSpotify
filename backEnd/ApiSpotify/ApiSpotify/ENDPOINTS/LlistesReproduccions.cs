@@ -26,8 +26,9 @@ namespace ApiSpotify.ENDPOINTS
             app.MapGet("/playlists/{id}", (Guid id) =>
             {
                 LlistaReproduccio? llista = DAOLlistaReproduccio.GetById(dbConn, id);
+
                 return llista is not null
-                    ? Results.Ok(llista)
+                    ? Results.Ok(LlistaReproduccioResponse.FromLlistaReproduccio(llista))
                     : Results.NotFound(new { message = $"Playlist amb Id {id} no trobada." });
             });
 
