@@ -98,9 +98,20 @@ namespace ApiSpotify.ENDPOINTS
                 return Results.Ok(updated);
             });
 
-            app.MapDelete("/cancons/{id}", (Guid id) =>
-                DAOCanco.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
-        
+            //Delete
+            app.MapDelete("/cancons/{id}", (Guid id, [FromQuery] Guid userId) =>
+            {
+                var canco = DAOCanco.GetById(dbConn, id);
+                if (canco == null) return Results.NotFound();
+
+                Usuari usuari = DAOUsuari.GetByIdWithRol(dbConn, userId);
+                if (usuari == null) return Results.NotFound(new { message = "Usuari no trobat." });
+
+                if (!PermisosHelper.UsuariTePermis(usuari, "EliminarCanco"))
+                    return Results.Forbid();
+
+                return DAOCanco.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound();
+            });
         }
     }
 }
