@@ -3,7 +3,7 @@ using System.Linq;
 
 public static class PermisosHelper
 {
-    // accio ha de ser exactament el nom del permís de la BD
+    
     public static bool UsuariTePermis(Usuari usuari, string accio)
     {
         // Si és Administrador, té tots els permisos
