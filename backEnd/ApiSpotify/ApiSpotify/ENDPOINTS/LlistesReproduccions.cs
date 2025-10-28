@@ -55,7 +55,9 @@ namespace ApiSpotify.ENDPOINTS
             });
 
             app.MapDelete("/playlists/{id}", (Guid id) =>
-                DAOLlistaReproduccio.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound());
+                DAOUsuari.Delete(dbConn, id)
+                    ? Results.NoContent()
+                    : Results.NotFound(new { message = $"Playlist amb Id {id} no trobada." }));
         }
     }
 }
