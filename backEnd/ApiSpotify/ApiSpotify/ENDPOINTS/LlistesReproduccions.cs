@@ -1,4 +1,5 @@
-﻿using ApiSpotify.MODELS;
+﻿using ApiSpotify.DTO;
+using ApiSpotify.MODELS;
 using ApiSpotify.REPOSITORY;
 using ApiSpotify.Services;
 
@@ -12,7 +13,14 @@ namespace ApiSpotify.ENDPOINTS
             app.MapGet("/playlists", () =>
             {
                 List<LlistaReproduccio> llistes = DAOLlistaReproduccio.GetAll(dbConn);
-                return Results.Ok(llistes);
+                List<LlistaReproduccioResponse> responseList = new List<LlistaReproduccioResponse>();
+
+                foreach (LlistaReproduccio llista in llistes)
+                {
+                    responseList.Add(LlistaReproduccioResponse.FromLlistaReproduccio(llista));
+                }
+
+                return Results.Ok(responseList);
             });
 
             app.MapGet("/playlists/{id}", (Guid id) =>
