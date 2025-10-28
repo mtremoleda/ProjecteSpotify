@@ -1,14 +1,12 @@
 namespace ApiSpotify.MODELS;
-
 using System.Collections.Generic;
 
-public class Rol
+public class Permiso
 {
     public int Id { get; set; }
     public string Nom { get; set; }
     public string Descripcio { get; set; }
 
-    public ICollection<Usuari> Usuaris{ get; set; }
-
+    
     public ICollection<RolPermiso> RolPermisos { get; set; }
 }
