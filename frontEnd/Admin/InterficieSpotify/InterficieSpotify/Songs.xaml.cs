@@ -11,7 +11,7 @@ namespace InterficieSpotify
     {
         public Songs()
         {
-            InitializeComponent();
+            InitializeComponent(); // Elements visulas defints en Solgs.xaml (interficie de songs)
         }
 
         private async void CarregarDades_Click(object sender, RoutedEventArgs e)
@@ -23,7 +23,7 @@ namespace InterficieSpotify
         {
             try
             {
-                using (HttpClient client = new HttpClient())
+                using (HttpClient client = new HttpClient()) // Per fer la paticio GET
                 {
 
                     string url = "https://localhost:56832/cancons";
@@ -31,19 +31,19 @@ namespace InterficieSpotify
 
                     var response = await client.GetAsync(url);
 
-                    if (response.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode) // Si l'api respon, es llegeix el contingut JSON
                     {
-                        string json = await response.Content.ReadAsStringAsync();
+                        string json = await response.Content.ReadAsStringAsync(); // Llegir el contingut de l'api en string
 
                         var opciones = new JsonSerializerOptions
                         {
                             PropertyNameCaseInsensitive = true //ignora les majuscules/minuscules a l'hora d'emaprellar-lo amb la calsse.
                                                                         
                         };
-                        var canciones = JsonSerializer.Deserialize<List<Canco>>(json, opciones);
+                        var canciones = JsonSerializer.Deserialize<List<Canco>>(json, opciones); // Pasa al JSON a una llista d'objectes
 
 
-                        dgSongs.ItemsSource = canciones; // Aqui emplenem el DataGrid
+                        dgSongs.ItemsSource = canciones; // Aqui emplenem el DataGrid i ho mostra en el recuadra 
                     }
                     else
                     {
