@@ -48,11 +48,11 @@ namespace ApiSpotify.ENDPOINTS
             app.MapPost("/Cancons", ([FromBody] CancoRequest req, [FromQuery] Guid userId) =>
             {
 
-                Usuari usuari = DAOUsuari.GetByIdWithRol(dbConn, userId);
+               /* Usuari usuari = DAOUsuari.GetByIdWithRol(dbConn, userId);
                 if (usuari == null) return Results.NotFound(new { message = "Usuari no trobat." });
 
                 if (!PermisosHelper.UsuariTePermis(usuari, "AfegirCanco"))
-                    return Results.Forbid();
+                    return Results.Forbid();*/
 
                 Canco canco = new Canco
                 {
@@ -77,13 +77,13 @@ namespace ApiSpotify.ENDPOINTS
                 if (existing == null)
                     return Results.NotFound();
 
-                Usuari usuari = DAOUsuari.GetByIdWithRol(dbConn, userId);
+               /* Usuari usuari = DAOUsuari.GetByIdWithRol(dbConn, userId);
                 if (usuari == null) return Results.NotFound(new { message = "Usuari no trobat." });
 
                 bool potEditar = PermisosHelper.UsuariTePermis(usuari, "EditarCanco") ||
                                  (usuari.Rol.Nom == "Artista" && existing.Artista == usuari.Nom);
 
-                if (!potEditar) return Results.Forbid();
+                if (!potEditar) return Results.Forbid();*/
 
                 Canco updated = new Canco
                 {
@@ -104,11 +104,11 @@ namespace ApiSpotify.ENDPOINTS
                 var canco = DAOCanco.GetById(dbConn, id);
                 if (canco == null) return Results.NotFound();
 
-                Usuari usuari = DAOUsuari.GetByIdWithRol(dbConn, userId);
+              /*  Usuari usuari = DAOUsuari.GetByIdWithRol(dbConn, userId);
                 if (usuari == null) return Results.NotFound(new { message = "Usuari no trobat." });
 
                 if (!PermisosHelper.UsuariTePermis(usuari, "EliminarCanco"))
-                    return Results.Forbid();
+                    return Results.Forbid();*/
 
                 return DAOCanco.Delete(dbConn, id) ? Results.NoContent() : Results.NotFound();
             });

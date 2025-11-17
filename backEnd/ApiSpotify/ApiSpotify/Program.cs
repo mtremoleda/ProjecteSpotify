@@ -49,6 +49,8 @@ builder.Services.AddSwaggerGen(options =>
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection")!;
 DatabaseConnection dbConn = new DatabaseConnection(connectionString);
 
+builder.Services.AddAuthentication();
+
 WebApplication webApp = builder.Build();
 
 //webApp.UseAntiforgery();
@@ -63,6 +65,9 @@ if (webApp.Environment.IsDevelopment())
         options.RoutePrefix = string.Empty; // opcional: swagger a la arrel
     });
 }
+
+webApp.UseAuthentication();
+
 
 // Registra tots els endpoints (els fitxers han d'existir o ser placeholders)
 webApp.MapCancoEndpoints(dbConn);

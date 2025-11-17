@@ -132,9 +132,9 @@ namespace ApiSpotify.REPOSITORY
             dbConn.Open();
 
             string sql = @"
-                SELECT u.Id, u.Nom, u.Contrasenya, u.Salt, r.Id AS RolId, r.Nom AS RolNom
+                SELECT u.Id, u.Nom, u.Contrasenya, u.Salt, r.RolId AS RolId, r.Nom AS RolNom
                 FROM Users u
-                JOIN Rols r ON u.RolId = r.Id
+                JOIN Rols r ON u.RolId = r.RolId
                 WHERE u.Id = @Id
             ";
 
