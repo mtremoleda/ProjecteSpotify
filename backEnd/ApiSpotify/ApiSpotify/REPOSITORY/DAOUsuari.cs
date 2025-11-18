@@ -14,7 +14,7 @@ namespace ApiSpotify.REPOSITORY
 
             dbConn.Open();
 
-            string sql = @"INSERT INTO Users (Id, nom, contrasenya, salt)
+            string sql = @"INSERT INTO Users (Id, nom, contrasenya, salt, RolId)
                            VALUES (@Id, @nom, @contrasenya, @salt)";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
@@ -134,7 +134,7 @@ namespace ApiSpotify.REPOSITORY
             string sql = @"
                 SELECT u.Id, u.Nom, u.Contrasenya, u.Salt, r.RolId AS RolId, r.Nom AS RolNom
                 FROM Users u
-                JOIN Rols r ON u.RolId = r.RolId
+                JOIN Rols r ON u.RolId = r.Id
                 WHERE u.Id = @Id
             ";
 

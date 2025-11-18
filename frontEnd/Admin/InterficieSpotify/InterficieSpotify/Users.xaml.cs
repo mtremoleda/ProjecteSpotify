@@ -25,7 +25,7 @@ namespace InterficieSpotify
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    string url = "https://localhost:56832/usuaris";
+                    string url = "http://localhost:5000/usuaris";
 
                     
 
