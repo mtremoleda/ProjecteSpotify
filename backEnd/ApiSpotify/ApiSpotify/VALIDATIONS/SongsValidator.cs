@@ -5,7 +5,7 @@ namespace ApiSpotify.VALIDATIONS
 {
     public static class SongsValidator
     {
-        public static Result Validate(CanconsRequest req)
+        public static Result Validate(CancoRequest req)
         {
             if (string.IsNullOrWhiteSpace(req.Titol))
             {
