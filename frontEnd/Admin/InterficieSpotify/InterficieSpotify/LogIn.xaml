@@ -6,7 +6,17 @@
         xmlns:local="clr-namespace:InterficieSpotify"
         mc:Ignorable="d"
         Title="LogIn" Height="450" Width="800">
-    <Grid>
-        
+    <Grid x:Name="gridprincipal">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black"/>
+                <GradientStop Color="#FF4FDAF9" Offset="1"/>
+                <GradientStop Color="#FF010505"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Button x:Name="entrar" Content="Entrar" HorizontalAlignment="Center" Height="55" Margin="0,325,0,0" VerticalAlignment="Top" Width="240" Click="Button_Click" FontSize="18"/>
+        <TextBox x:Name="username" HorizontalAlignment="Center" Height="55" Margin="0,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="240" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" Padding="0,-2,0,0" Background="#FFB4FFFE"/>
+        <TextBox x:Name="password" HorizontalAlignment="Center" Height="55" Margin="0,217,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="240" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#FFB4FFFE"/>
+
     </Grid>
 </Window>
