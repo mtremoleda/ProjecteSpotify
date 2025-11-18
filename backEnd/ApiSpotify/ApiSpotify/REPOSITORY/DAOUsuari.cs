@@ -126,7 +126,7 @@ namespace ApiSpotify.REPOSITORY
             return rows > 0;
         }
 
-
+        /*
         public static Usuari? GetByIdWithRol(DatabaseConnection dbConn, Guid id)
         {
             dbConn.Open();
@@ -164,7 +164,7 @@ namespace ApiSpotify.REPOSITORY
             dbConn.Close();
             return usuari;
         }
-
+        */
 
 
 
