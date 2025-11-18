@@ -3,10 +3,11 @@ using System.Collections.Generic;
 
 public class Permiso
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
+    public string Codi { get; set; }
     public string Nom { get; set; }
     public string Descripcio { get; set; }
 
-    
-    public ICollection<RolPermiso> RolPermisos { get; set; }
+
+
 }
