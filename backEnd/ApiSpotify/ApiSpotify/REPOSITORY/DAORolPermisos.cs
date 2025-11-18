@@ -9,7 +9,7 @@ namespace ApiSpotify.REPOSITORY
 {
     public class DAORolPermisos
     {
-        public static void Insert(DatabaseConnection dbConn, LlistaReproduccioCanco relacio)
+        public static void Insert(DatabaseConnection dbConn, RolPermisos relacio)
         {
             dbConn.Open();
 
@@ -18,8 +18,8 @@ namespace ApiSpotify.REPOSITORY
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             cmd.Parameters.AddWithValue("@Id", relacio.Id);
-            cmd.Parameters.AddWithValue("@RolId", relacio.IdCanco);
-            cmd.Parameters.AddWithValue("@PermisosId", relacio.IdLlista);
+            cmd.Parameters.AddWithValue("@RolId", relacio.RolId);
+            cmd.Parameters.AddWithValue("@PermisosId", relacio.PermisosId);
 
             int rows = cmd.ExecuteNonQuery();
             Console.WriteLine($"{rows} fila inserida.");
