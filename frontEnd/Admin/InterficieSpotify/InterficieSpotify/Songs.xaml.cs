@@ -26,7 +26,7 @@ namespace InterficieSpotify
                 using (HttpClient client = new HttpClient()) // Per fer la paticio GET
                 {
 
-                    string url = "https://localhost:56832/cancons";
+                    string url = "http://localhost:5000/cancons";
                     
 
                     var response = await client.GetAsync(url);

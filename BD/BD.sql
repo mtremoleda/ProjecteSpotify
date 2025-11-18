@@ -52,3 +52,5 @@ CREATE TABLE Playlist_song (
     FOREIGN KEY (id_song) REFERENCES Songs(Id)
         
 );
+
+
