@@ -8,7 +8,5 @@ public class Rol
     public string Nom { get; set; }
     public string Descripcio { get; set; }
 
-    public ICollection<Usuari> Usuaris{ get; set; }
-
-    public ICollection<RolPermiso> RolPermisos { get; set; }
+    
 }
