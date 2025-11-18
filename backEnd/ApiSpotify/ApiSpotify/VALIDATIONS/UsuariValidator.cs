@@ -1,5 +1,5 @@
 ﻿using ApiSpotify.DTO;
-using ApiSpotify.Common; // Aquí tens el Result
+using ApiSpotify.Common; 
 
 namespace ApiSpotify.VALIDATIONS
 {
