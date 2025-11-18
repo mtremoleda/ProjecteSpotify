@@ -1,7 +1,7 @@
 namespace ApiSpotify.MODELS;
 using System.Collections.Generic;
 
-public class Permiso
+public class Permisos
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public string Codi { get; set; }
