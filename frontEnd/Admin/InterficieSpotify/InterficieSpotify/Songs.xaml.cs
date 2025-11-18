@@ -11,7 +11,8 @@ namespace InterficieSpotify
     {
         public Songs()
         {
-            InitializeComponent(); // Elements visulas defints en Solgs.xaml (interficie de songs)
+            InitializeComponent(); // Elements visulas defints en Songs.xaml (interficie de songs)
+            Loaded += async (s, e) => await CargarCancionesAsync();
         }
 
         private async void CarregarDades_Click(object sender, RoutedEventArgs e)
