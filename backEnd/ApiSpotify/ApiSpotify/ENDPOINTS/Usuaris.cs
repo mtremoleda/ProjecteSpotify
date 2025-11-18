@@ -3,6 +3,8 @@ using ApiSpotify.MODELS;
 using ApiSpotify.MODELS;
 using ApiSpotify.REPOSITORY;
 using ApiSpotify.Services;
+using ApiSpotify.VALIDATIONS;
+
 
 
 namespace ApiSpotify.ENDPOINTS
