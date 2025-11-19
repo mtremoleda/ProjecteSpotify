@@ -24,20 +24,23 @@ namespace ApiSpotify.ENDPOINTS
 
             
 
-            // POST /cancons
-            app.MapPost("/rolpermisos", ([FromBody] RolPermisosRequest req) =>
+            // POST
+            app.MapPost("/rols/{id}/permisos", ([FromBody] RolPermisosRequest req, Guid id) =>
             {
+                Console.WriteLine($"rolid, {id}");
+
                 RolPermisos rolpermisos = new RolPermisos
                 {
                     Id = Guid.NewGuid(),
-                    RolId = req.RolId,
+                    RolId = id,
                     PermisosId = req.PermisosId
                     
                 };
 
                 DAORolPermisos.Insert(dbConn, rolpermisos);
+                List < RolPermisos > lrp = new List<RolPermisos> ();
 
-                return Results.Created($"/rolpermisos/{rolpermisos.Id}", rolpermisos);
+                return Results.Created($"/rols/{id}/permisos", lrp);
 
 
 
