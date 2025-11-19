@@ -47,7 +47,7 @@ namespace ApiSpotify.ENDPOINTS
             
 
             // POST /cancons
-            app.MapPost("/Cancons", ([FromBody] CancoRequest req, [FromQuery] Guid userId) =>
+            app.MapPost("/Cancons", ([FromBody] CancoRequest req) =>
             {
 
                 /* Usuari usuari = DAOUsuari.GetByIdWithRol(dbConn, userId);
