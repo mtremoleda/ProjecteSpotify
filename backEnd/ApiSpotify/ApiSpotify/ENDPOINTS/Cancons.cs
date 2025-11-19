@@ -1,14 +1,16 @@
-﻿using ApiSpotify.Services;
+﻿using ApiSpotify.Common;
+using ApiSpotify.DTO;
+using ApiSpotify.MODELS;
+using ApiSpotify.REPOSITORY;
+using ApiSpotify.Services;
+using ApiSpotify.VALIDATIONS;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using ApiSpotify.MODELS;
-using ApiSpotify.REPOSITORY;
-using Microsoft.AspNetCore.Mvc;
-using ApiSpotify.DTO;
 
 namespace ApiSpotify.ENDPOINTS
 {
@@ -48,11 +50,21 @@ namespace ApiSpotify.ENDPOINTS
             app.MapPost("/Cancons", ([FromBody] CancoRequest req, [FromQuery] Guid userId) =>
             {
 
-               /* Usuari usuari = DAOUsuari.GetByIdWithRol(dbConn, userId);
-                if (usuari == null) return Results.NotFound(new { message = "Usuari no trobat." });
+                /* Usuari usuari = DAOUsuari.GetByIdWithRol(dbConn, userId);
+                 if (usuari == null) return Results.NotFound(new { message = "Usuari no trobat." });
 
-                if (!PermisosHelper.UsuariTePermis(usuari, "AfegirCanco"))
-                    return Results.Forbid();*/
+                 if (!PermisosHelper.UsuariTePermis(usuari, "AfegirCanco"))
+                     return Results.Forbid();*/
+
+                Result result = SongsValidator.Validate(req);
+                if (!result.IsOk)
+                {
+                    return Results.BadRequest(new
+                    {
+                        error = result.ErrorCode,
+                        message = result.ErrorMessage
+                    });
+                }
 
                 Canco canco = new Canco
                 {
@@ -77,13 +89,23 @@ namespace ApiSpotify.ENDPOINTS
                 if (existing == null)
                     return Results.NotFound();
 
-               /* Usuari usuari = DAOUsuari.GetByIdWithRol(dbConn, userId);
-                if (usuari == null) return Results.NotFound(new { message = "Usuari no trobat." });
+                /* Usuari usuari = DAOUsuari.GetByIdWithRol(dbConn, userId);
+                 if (usuari == null) return Results.NotFound(new { message = "Usuari no trobat." });
 
-                bool potEditar = PermisosHelper.UsuariTePermis(usuari, "EditarCanco") ||
-                                 (usuari.Rol.Nom == "Artista" && existing.Artista == usuari.Nom);
+                 bool potEditar = PermisosHelper.UsuariTePermis(usuari, "EditarCanco") ||
+                                  (usuari.Rol.Nom == "Artista" && existing.Artista == usuari.Nom);
 
-                if (!potEditar) return Results.Forbid();*/
+                 if (!potEditar) return Results.Forbid();*/
+
+                Result result = SongsValidator.Validate(req);
+                if (!result.IsOk)
+                {
+                    return Results.BadRequest(new
+                    {
+                        error = result.ErrorCode,
+                        message = result.ErrorMessage
+                    });
+                }
 
                 Canco updated = new Canco
                 {

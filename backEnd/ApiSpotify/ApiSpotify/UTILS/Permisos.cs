@@ -3,7 +3,7 @@ using System.Linq;
 
 public static class PermisosHelper
 {
-    
+    /*
     public static bool UsuariTePermis(Usuari usuari, string accio)
     {
         // Si és Administrador, té tots els permisos
@@ -14,4 +14,5 @@ public static class PermisosHelper
         return usuari.Rol.RolPermisos != null && usuari.Rol.RolPermisos.Any(rp => rp.Permiso.Nom == accio);
 
     }
+    */
 }

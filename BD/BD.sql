@@ -54,8 +54,6 @@ CREATE TABLE Playlist_song (
 );
 
 
-<<<<<<< HEAD
-=======
 
 CREATE TABLE Rols (
     Id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
@@ -87,4 +85,3 @@ CREATE TABLE UsersRols (
     FOREIGN KEY (RolId) REFERENCES Rols(Id)
 
 );
->>>>>>> 6eab6eafee8ddb11490cee0c3c5f7d1b644d39c4

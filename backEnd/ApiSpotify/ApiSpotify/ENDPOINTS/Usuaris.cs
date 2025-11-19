@@ -1,8 +1,11 @@
-﻿using ApiSpotify.DTO;
+﻿using ApiSpotify.Common;
+using ApiSpotify.DTO;
 using ApiSpotify.MODELS;
 using ApiSpotify.MODELS;
 using ApiSpotify.REPOSITORY;
 using ApiSpotify.Services;
+using ApiSpotify.VALIDATIONS;
+
 
 
 namespace ApiSpotify.ENDPOINTS
@@ -36,6 +39,16 @@ namespace ApiSpotify.ENDPOINTS
 
             app.MapPost("/usuaris", (UsuariRequest req) =>
             {
+                Result result = UsuariValidator.Validate(req);
+                if (!result.IsOk)
+                {
+                    return Results.BadRequest(new
+                    {
+                        error = result.ErrorCode,
+                        message = result.ErrorMessage
+                    });
+                }
+
                 string salt = UTILS.UtilsContrasenya.GenerateSalt();
                 string hashedPassword = UTILS.UtilsContrasenya.HashPassword(req.Contrasenya, salt);
 
@@ -56,6 +69,16 @@ namespace ApiSpotify.ENDPOINTS
                 var existing = DAOUsuari.GetById(dbConn, id);
                 if (existing == null)
                     return Results.NotFound(new { message = $"Usuari amb Id {id} no trobat." });
+
+                Result result = UsuariValidator.Validate(req);
+                if (!result.IsOk)
+                {
+                    return Results.BadRequest(new
+                    {
+                        error = result.ErrorCode,
+                        message = result.ErrorMessage
+                    });
+                }
 
                 string newSalt = UTILS.UtilsContrasenya.GenerateSalt();
                 string hashedPassword = UTILS.UtilsContrasenya.HashPassword(req.Contrasenya, newSalt);
