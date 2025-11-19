@@ -32,13 +32,15 @@ namespace InterficieSpotify
             string pass = password.Password;
 
             var client = new HttpClient();
-            var loginData = new { Username = user, Password = pass };
+            var loginData = new { nom = user, contrasenya = pass };
 
             var response = await client.PostAsJsonAsync("http://localhost:5080/login", loginData);
 
             if (response.IsSuccessStatusCode)
             {
-                MessageBox.Show("Login correcto");
+                MainWindow mainwindow = new MainWindow();
+                this.Close();
+                mainwindow.Show();
             }
             else
             {

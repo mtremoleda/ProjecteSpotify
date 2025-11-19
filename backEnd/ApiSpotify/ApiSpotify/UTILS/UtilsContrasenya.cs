@@ -6,40 +6,29 @@ namespace ApiSpotify.UTILS
 {
     public static class UtilsContrasenya
     {
-        private static readonly string specialChars = "!@#$%^&*()-_=+[]{}<>?/";
-
-        public static string GenerateSalt(int length = 8)
+        
+        public static string GenerateSalt(int size = 16)
         {
-            byte[] saltBytes = new byte[length];
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(saltBytes);
-            }
-
-            string baseSalt = Convert.ToBase64String(saltBytes);
-
-            Random rnd = new Random();
-            char special = specialChars[rnd.Next(specialChars.Length)];
-
-            return baseSalt + special;
+            byte[] salt = new byte[size];
+            RandomNumberGenerator.Fill(salt);
+            return Convert.ToBase64String(salt);
         }
 
-        public static string HashPassword(string password, string salt)
+        public static string HashPassword(string password, string saltBase64)
         {
-            using (var sha256 = SHA256.Create())
-            {
-                string combined = password + salt;
-                byte[] bytes = Encoding.UTF8.GetBytes(combined);
-                byte[] hash = sha256.ComputeHash(bytes);
-                return Convert.ToBase64String(hash);
-            }
+            byte[] salt = Convert.FromBase64String(saltBase64);
+
+            using var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 100000, HashAlgorithmName.SHA256);
+            byte[] hash = pbkdf2.GetBytes(32);
+
+            return Convert.ToBase64String(hash);
         }
 
-        public static bool VerifyPassword(string enteredPassword, string storedHash, string salt)
+        public static bool VerifyPassword(string password, string hashBase64, string saltBase64)
         {
-            string enteredHash = HashPassword(enteredPassword, salt);
-            return storedHash == enteredHash;
+            return HashPassword(password, saltBase64) == hashBase64;
         }
+
 
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.Data;
 using ApiSpotify.REPOSITORY;
 using ApiSpotify.MODELS;
 using Microsoft.AspNetCore.Mvc;
+using ApiSpotify.UTILS;
 
 namespace ApiSpotify.ENDPOINTS
 {
@@ -19,7 +20,7 @@ namespace ApiSpotify.ENDPOINTS
                     return Results.Unauthorized();
 
                 // Validar contrasenya
-                bool valid = PasswordHelper.VerifyPassword(
+                bool valid = UtilsContrasenya.VerifyPassword(
                     req.contrasenya,  // <- contrasenya enviada del WPF
                     user.Contrasenya, // <- hash de la BD
                     user.Salt         // <- salt de la BD

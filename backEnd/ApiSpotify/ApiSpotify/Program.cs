@@ -77,6 +77,8 @@ webApp.MapLlistareproduccioCancoEndpointsEndpoints(dbConn);
 webApp.MapQualitatsFitxersEndpoints(dbConn);
 webApp.MapExtreureMetadadesEndpoints(dbConn);
 webApp.MapRolEndpoints(dbConn);
+webApp.MaploginEndpoints(dbConn);
+
 
 webApp.Run();
 
