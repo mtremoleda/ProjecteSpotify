@@ -20,7 +20,7 @@
             </LinearGradientBrush>
         </Grid.Background>
         <Button x:Name="Enrrere" Content="🔙" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="Enrrere_Click" Background="{x:Null}" Height="38" Width="50" FontSize="20" BorderBrush="{x:Null}"/>
-        <Button x:Name="CarregarDades" Content="Get All" HorizontalAlignment="Left" Margin="157,17,0,0" VerticalAlignment="Top" Click="CarregarDades_Click" Height="43" Width="99" FontSize="22" Grid.ColumnSpan="2">
+        <Button x:Name="CarregarDades" Content="Get All" HorizontalAlignment="Left" Margin="70,17,0,0" VerticalAlignment="Top" Click="CarregarDades_Click" Height="43" Width="99" FontSize="22" Grid.Column="1">
             <Button.Background>
                 <ImageBrush/>
             </Button.Background>
@@ -32,17 +32,17 @@
                   IsReadOnly="True"
                   VerticalAlignment="Top"
                   Height="316" Margin="18,90,18,0" SelectionChanged="dgSongs_SelectionChanged" Grid.ColumnSpan="2"/>
-        <Button x:Name="Post" Content="Post" HorizontalAlignment="Left" Margin="93,17,0,0" VerticalAlignment="Top" Click="CarregarDades_Click" Height="43" Width="99" FontSize="22" Grid.Column="1">
+        <Button x:Name="Post" Content="Post" HorizontalAlignment="Left" Margin="192,17,0,0" VerticalAlignment="Top" Click="CarregarDades_Click" Height="43" Width="99" FontSize="22" Grid.Column="1">
             <Button.Background>
                 <ImageBrush/>
             </Button.Background>
         </Button>
-        <Button x:Name="Put" Content="Put" HorizontalAlignment="Center" Margin="0,17,0,0" VerticalAlignment="Top" Click="CarregarDades_Click" Height="43" Width="100" FontSize="22" Grid.Column="1">
+        <Button x:Name="Put" Content="Put" HorizontalAlignment="Left" Margin="313,17,0,0" VerticalAlignment="Top" Click="CarregarDades_Click" Height="43" Width="100" FontSize="22" Grid.Column="1">
             <Button.Background>
                 <ImageBrush/>
             </Button.Background>
         </Button>
-        <Button x:Name="Delete" Content="Delete" HorizontalAlignment="Left" Margin="393,17,0,0" VerticalAlignment="Top" Click="CarregarDades_Click" Height="43" Width="100" FontSize="22" Grid.Column="1">
+        <Button x:Name="Delete" Content="Delete" HorizontalAlignment="Left" Margin="436,17,0,0" VerticalAlignment="Top" Click="CarregarDades_Click" Height="43" Width="100" FontSize="22" Grid.Column="1">
             <Button.Background>
                 <ImageBrush/>
             </Button.Background>
