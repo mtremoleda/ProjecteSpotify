@@ -34,7 +34,7 @@ namespace InterficieSpotify
             var client = new HttpClient();
             var loginData = new { Username = user, Password = pass };
 
-            var response = await client.PostAsJsonAsync("http://localhost:5000/cancons", loginData);
+            var response = await client.PostAsJsonAsync("http://localhost:5080/login", loginData);
 
             if (response.IsSuccessStatusCode)
             {

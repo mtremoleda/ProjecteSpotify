@@ -14,7 +14,7 @@ namespace ApiSpotify.REPOSITORY
 
             dbConn.Open();
 
-            string sql = @"INSERT INTO Users (Id, nom, contrasenya, salt, RolId)
+            string sql = @"INSERT INTO Users (Id, nom, contrasenya, salt)
                            VALUES (@Id, @nom, @contrasenya, @salt)";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
