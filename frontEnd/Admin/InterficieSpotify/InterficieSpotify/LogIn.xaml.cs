@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,9 +26,24 @@ namespace InterficieSpotify
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
+            string user = username.Text;
+            string pass = password.Password;
 
+            var client = new HttpClient();
+            var loginData = new { Username = user, Password = pass };
+
+            var response = await client.PostAsJsonAsync("http://localhost:5000/cancons", loginData);
+
+            if (response.IsSuccessStatusCode)
+            {
+                MessageBox.Show("Login correcto");
+            }
+            else
+            {
+                MessageBox.Show("Usuario o contraseña incorrectos");
+            }
         }
 
        
