@@ -11,14 +11,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiSpotify.ENDPOINTS
 {
-    public static class EndpointRolPermisos
+    public static class EndpointRol
     {
-        public static void MapRolPermisosEndpoints(this WebApplication app, DatabaseConnection dbConn)
+        public static void MapRolEndpoints(this WebApplication app, DatabaseConnection dbConn)
         {
             // GET ALL
-            app.MapGet("/rolpermisos", () =>
+            app.MapGet("/rols/{id}/permisos", (Guid id) =>
             {
-                List<RolPermisos> rolpermisos = DAORolPermisos.GetAll(dbConn);
+                List<RolPermisos> rolpermisos = DAORolPermisos.GetAll(dbConn, id);
                 return Results.Ok(rolpermisos);
             });
 
