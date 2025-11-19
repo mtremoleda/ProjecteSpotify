@@ -130,12 +130,12 @@ namespace ApiSpotify.REPOSITORY
         {
             dbConn.Open();
 
-            string sql = @"SELECT Id, Nom, Contrasenya, Salt
-                       FROM Usuaris
-                       WHERE Nom = @Nom";
+            string sql = @"SELECT id, nom, contrasenya, salt
+                       FROM Users
+                       WHERE nom = @nom";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
-            cmd.Parameters.AddWithValue("@Nom", nom);
+            cmd.Parameters.AddWithValue("@nom", nom);
 
             using SqlDataReader reader = cmd.ExecuteReader();
 
