@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.Data;
 using ApiSpotify.REPOSITORY;
 using ApiSpotify.MODELS;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ApiSpotify.ENDPOINTS
 {
@@ -12,7 +13,7 @@ namespace ApiSpotify.ENDPOINTS
             app.MapPost("/login", ([FromBody] LoginRequest req) =>
             {
                 // 1. Obtener usuario por nombre
-                Usuari user = DAOUsuari.GetByNom(dbConn, req.Username);
+                Usuari user = DAOUsuari.GetByNom(dbConn, req.nom);
 
                 if (user == null)
                     return Results.Unauthorized();

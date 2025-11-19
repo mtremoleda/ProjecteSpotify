@@ -126,6 +126,36 @@ namespace ApiSpotify.REPOSITORY
             return rows > 0;
         }
 
+        public static Usuari GetByNom(DatabaseConnection dbConn, string nom)
+        {
+            dbConn.Open();
+
+            string sql = @"SELECT Id, Nom, Contrasenya, Salt
+                       FROM Usuaris
+                       WHERE Nom = @Nom";
+
+            using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+            cmd.Parameters.AddWithValue("@Nom", nom);
+
+            using SqlDataReader reader = cmd.ExecuteReader();
+
+            if (!reader.Read())
+            {
+                dbConn.Close();
+                return null;
+            }
+
+            Usuari user = new Usuari
+            {
+                Id = reader.GetGuid(0),
+                Nom = reader.GetString(1),
+                Contrasenya = reader.GetString(2),
+                Salt = reader.GetString(3)
+            };
+
+            dbConn.Close();
+            return user;
+        }
         /*
         public static Usuari? GetByIdWithRol(DatabaseConnection dbConn, Guid id)
         {
