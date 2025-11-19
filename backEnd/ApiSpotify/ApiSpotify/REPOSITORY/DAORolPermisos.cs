@@ -27,14 +27,16 @@ namespace ApiSpotify.REPOSITORY
             dbConn.Close();
         }
 
-        public static List<RolPermisos> GetAll(DatabaseConnection dbConn)
+        public static List<RolPermisos> GetAll(DatabaseConnection dbConn, Guid RolId)
         {
             List<RolPermisos> relacions = new();
             dbConn.Open();
 
-            string sql = "SELECT Id, RolId, PermisosId FROM RolPermisos";
+            string sql = "SELECT Id, RolId, PermisosId FROM RolPermisos WHERE RolId = @RolId";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+            cmd.Parameters.AddWithValue("@RolId", RolId);
+
             using SqlDataReader reader = cmd.ExecuteReader();
 
             while (reader.Read())
