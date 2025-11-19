@@ -83,7 +83,7 @@ namespace ApiSpotify.ENDPOINTS
 
             });
 
-            app.MapPut("/cancons/{id}", (Guid id, CancoRequest req, [FromQuery] Guid userId) =>
+            app.MapPut("/cancons/{id}", (Guid id, CancoRequest req) =>
             {
                 var existing = DAOCanco.GetById(dbConn, id);
                 if (existing == null)
