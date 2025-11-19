@@ -23,7 +23,7 @@ namespace ApiSpotify.ENDPOINTS
 
 
 
-            // POST /cancons
+            // POST
             app.MapPost("/usersrols", ([FromBody] UsersRolsRequest req) =>
             {
                 UsersRols usersrols = new UsersRols
