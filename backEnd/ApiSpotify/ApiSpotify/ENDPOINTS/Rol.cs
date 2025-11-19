@@ -38,9 +38,10 @@ namespace ApiSpotify.ENDPOINTS
                 };
 
                 DAORolPermisos.Insert(dbConn, rolpermisos);
-                List < RolPermisos > lrp = new List<RolPermisos> ();
+
+                List<RolPermisos> lrp = DAORolPermisos.GetAll(dbConn, id);
                 Console.WriteLine($"/rols/{id}/permisos");
-                return Results.Created($"/rols/{id}/permisos", lrp);
+                return Results.Ok(lrp);
 
 
 
