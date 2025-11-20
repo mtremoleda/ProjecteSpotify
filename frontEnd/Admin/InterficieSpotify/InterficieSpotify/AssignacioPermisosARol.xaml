@@ -1,0 +1,60 @@
+﻿<Window x:Class="InterficieSpotify.AssignPermisos"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InterficieSpotify"
+        mc:Ignorable="d"
+        Title="Assigna Permisos" Height="550" Width="900">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF64467F"/>
+                <GradientStop Color="White" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <!-- ComboBox per seleccionar Rol -->
+        <StackPanel Orientation="Horizontal" Margin="20,10,20,10" Grid.Column="1">
+            <TextBlock Text="Selecciona Rol:" VerticalAlignment="Center" FontSize="16" Margin="0,0,10,0"/>
+            <ComboBox x:Name="cbRoles" Width="200" Height="30" FontSize="16"/>
+        </StackPanel>
+
+        <!-- DataGrid amb permisos -->
+        <DataGrid x:Name="dgPermisos"
+                  Grid.Row="1"
+                  Grid.Column="1"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  Margin="20,10"
+                  Height="400">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Permís" Binding="{Binding Nom}" Width="*"/>
+                <DataGridCheckBoxColumn Header="Assignat" Binding="{Binding Assignat}" Width="120"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Botó Guardar -->
+        <Button x:Name="btnGuardar"
+                Content="Guardar"
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="150"
+                Height="40"
+                FontSize="20"
+                HorizontalAlignment="Right"
+                Margin="0,10,20,10"
+                Click="btnGuardar_Click"/>
+    </Grid>
+</Window>
