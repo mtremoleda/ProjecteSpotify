@@ -168,3 +168,5 @@ INSERT INTO Permisos (Id, Codi, Nom, Descripcio) VALUES
 ('f81d4fc3-7dec-11d0-a765-00a0c91e6bf6', 'CD', 'Eliminar comentaris', 'Eliminar comentaris inapropiats'),
 ('f81d4fc4-7dec-11d0-a765-00a0c91e6bf6', 'US', 'Suspensió temporal', 'Suspensió temporal d’usuaris per mal ús');
 
+ALTER TABLE Users
+ALTER COLUMN salt NVARCHAR(100);

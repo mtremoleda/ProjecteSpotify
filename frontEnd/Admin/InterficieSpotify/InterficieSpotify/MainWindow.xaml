@@ -31,7 +31,7 @@
                 <ImageBrush/>
             </Button.Background>
         </Button>
-        <Button Content="PlayList" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="560,238,0,0" VerticalAlignment="Top" Height="41" Width="140" Click="Button_Click_2">
+        <Button Content="Assignar Permis a un Rol" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="560,238,0,0" VerticalAlignment="Top" Height="41" Width="140" Click="Button_Click_2">
             <Button.Background>
                 <ImageBrush/>
             </Button.Background>
