@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InterficieSpotify"
         mc:Ignorable="d"
-        Title="Songs" Height="450" Width="800">
+        Title="Cançons" Height="500" Width="900">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="13*"/>
-            <ColumnDefinition Width="37*"/>
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="#FFA29723"/>
@@ -19,33 +19,37 @@
                 <GradientStop Color="#FFE7E4C7" Offset="0.87"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Button x:Name="Enrrere" Content="🔙" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="Enrrere_Click" Background="{x:Null}" Height="38" Width="50" FontSize="20" BorderBrush="{x:Null}"/>
-        <Button x:Name="CarregarDades" Content="Get All" HorizontalAlignment="Left" Margin="70,17,0,0" VerticalAlignment="Top" Click="CarregarDades_Click" Height="43" Width="99" FontSize="22" Grid.Column="1">
-            <Button.Background>
-                <ImageBrush/>
-            </Button.Background>
-        </Button>
 
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="10,10,10,10">
+            <Button x:Name="Enrrere" Content="🔙" Click="Enrrere_Click" Margin="0,0,10,0" Height="38" Width="50" FontSize="20" Background="Transparent" BorderBrush="Transparent"/>
+            <Button x:Name="CarregarDades" Content="Obtenir Totes" Click="CarregarDades_Click" Margin="0,0,10,0" Height="38" FontSize="16"/>
+            <Button x:Name="Post" Content="Afegir Cançó" Click="AfegirCancoDesdeGrid" Margin="0,0,10,0" Height="38" FontSize="16" Background="LightGreen"/>
+        </StackPanel>
 
         <DataGrid x:Name="dgSongs" 
-                  AutoGenerateColumns="True"
-                  IsReadOnly="True"
-                  VerticalAlignment="Top"
-                  Height="316" Margin="18,90,18,0" SelectionChanged="dgSongs_SelectionChanged" Grid.ColumnSpan="2"/>
-        <Button x:Name="Post" Content="Post" HorizontalAlignment="Left" Margin="192,17,0,0" VerticalAlignment="Top" Click="CarregarDades_Click" Height="43" Width="99" FontSize="22" Grid.Column="1">
-            <Button.Background>
-                <ImageBrush/>
-            </Button.Background>
-        </Button>
-        <Button x:Name="Put" Content="Put" HorizontalAlignment="Left" Margin="313,17,0,0" VerticalAlignment="Top" Click="CarregarDades_Click" Height="43" Width="100" FontSize="22" Grid.Column="1">
-            <Button.Background>
-                <ImageBrush/>
-            </Button.Background>
-        </Button>
-        <Button x:Name="Delete" Content="Delete" HorizontalAlignment="Left" Margin="436,17,0,0" VerticalAlignment="Top" Click="CarregarDades_Click" Height="43" Width="100" FontSize="22" Grid.Column="1">
-            <Button.Background>
-                <ImageBrush/>
-            </Button.Background>
-        </Button>
+                  Grid.Row="1"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  CanUserSortColumns="True"
+                  Margin="10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id, Mode=OneWay}" IsReadOnly="True" Width="*"/>
+                <DataGridTextColumn Header="Títol" Binding="{Binding Titol, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                <DataGridTextColumn Header="Artista" Binding="{Binding Artista, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                <DataGridTextColumn Header="Àlbum" Binding="{Binding Album, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                <DataGridTextColumn Header="Durada (seg)" Binding="{Binding Durada, UpdateSourceTrigger=PropertyChanged, StringFormat=F2}" Width="*"/>
+                <DataGridTemplateColumn Header="Accions" Width="120">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Desar" Click="GuardarCancoDesdeGrid" Margin="2" Padding="5" Background="LightBlue" FontSize="10"/>
+                                <Button x:Name="btnEliminar" Content="Eliminar" Click="EliminarCancoDesdeGrid" Margin="2" Padding="5" Background="LightCoral" FontSize="10"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
