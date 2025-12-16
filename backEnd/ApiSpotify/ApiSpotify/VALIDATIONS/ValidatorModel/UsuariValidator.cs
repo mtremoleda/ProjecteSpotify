@@ -11,12 +11,28 @@ namespace ApiSpotify.Validations
 
         public static Result Validate(UsuariRequest req)
         {
-            if (string.IsNullOrWhiteSpace(req.Nom))
+            var resultNom = ValidateNom(req.Nom);
+            if (!resultNom.IsOk)
+                return resultNom;
+
+            var resultContrasenya = ValidateContrasenya(req.Contrasenya);
+            if (!resultContrasenya.IsOk)
+                return resultContrasenya;
+
+            return Result.Ok();
+        }
+
+        private static Result ValidateNom(string nom)
+        {
+            if (string.IsNullOrWhiteSpace(nom))
             {
-                return Result.Failure("El nom és obligatori", "NOM_OBLIGATORI");
+                return Result.Failure(
+                    "El nom és obligatori",
+                    "NOM_OBLIGATORI"
+                );
             }
 
-            if (req.Nom.Length > NOM_MAX_LONGITUD)
+            if (nom.Length > NOM_MAX_LONGITUD)
             {
                 return Result.Failure(
                     $"El nom no pot superar els {NOM_MAX_LONGITUD} caràcters",
@@ -24,13 +40,21 @@ namespace ApiSpotify.Validations
                 );
             }
 
-            if (string.IsNullOrWhiteSpace(req.Contrasenya))
+            return Result.Ok();
+        }
+
+        private static Result ValidateContrasenya(string contrasenya)
+        {
+            if (string.IsNullOrWhiteSpace(contrasenya))
             {
-                return Result.Failure("La contrasenya és obligatòria", "CONTRASENYA_OBLIGATORIA");
+                return Result.Failure(
+                    "La contrasenya és obligatòria",
+                    "CONTRASENYA_OBLIGATORIA"
+                );
             }
 
-            if (req.Contrasenya.Length < CONTRASENYA_MIN_LONGITUD ||
-                req.Contrasenya.Length > CONTRASENYA_MAX_LONGITUD)
+            if (contrasenya.Length < CONTRASENYA_MIN_LONGITUD ||
+                contrasenya.Length > CONTRASENYA_MAX_LONGITUD)
             {
                 return Result.Failure(
                     $"La contrasenya ha de tenir entre {CONTRASENYA_MIN_LONGITUD} i {CONTRASENYA_MAX_LONGITUD} caràcters",
@@ -42,4 +66,3 @@ namespace ApiSpotify.Validations
         }
     }
 }
-
