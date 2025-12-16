@@ -4,7 +4,7 @@ using ApiSpotify.MODELS;
 using ApiSpotify.MODELS;
 using ApiSpotify.REPOSITORY;
 using ApiSpotify.Services;
-using ApiSpotify.VALIDATIONS;
+using ApiSpotify.Validations;
 
 
 

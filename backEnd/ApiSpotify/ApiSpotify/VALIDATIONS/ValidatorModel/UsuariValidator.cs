@@ -1,7 +1,7 @@
 ﻿using ApiSpotify.DTO;
 using ApiSpotify.Common;
 
-namespace ApiSpotify.VALIDATIONS
+namespace ApiSpotify.Validations
 {
     public static class UsuariValidator
     {

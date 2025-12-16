@@ -3,7 +3,7 @@ using ApiSpotify.DTO;
 using ApiSpotify.MODELS;
 using ApiSpotify.REPOSITORY;
 using ApiSpotify.Services;
-using ApiSpotify.VALIDATIONS;
+using ApiSpotify.Validations;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

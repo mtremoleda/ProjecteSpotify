@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiSpotify.VALIDATIONS.ValidatorADO
+namespace ApiSpotify.Validations.ValidatorADO
 {
     internal class RolValidator
     {
