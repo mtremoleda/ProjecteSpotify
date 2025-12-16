@@ -42,11 +42,7 @@ namespace ApiSpotify.ENDPOINTS
                 Result result = UsuariValidator.Validate(req);
                 if (!result.IsOk)
                 {
-                    return Results.BadRequest(new
-                    {
-                        error = result.ErrorCode,
-                        message = result.ErrorMessage
-                    });
+                    return Results.BadRequest(result);
                 }
 
                 string salt = UTILS.UtilsContrasenya.GenerateSalt();
