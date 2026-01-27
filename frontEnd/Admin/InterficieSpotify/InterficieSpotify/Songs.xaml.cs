@@ -13,7 +13,7 @@ namespace InterficieSpotify
 {
     public partial class Songs : Window
     {
-        private readonly string apiUrl = "http://localhost:5080/cancons";
+        private readonly string apiUrl = "http://localhost:5000/cancons";
         private List<Canco> listaCancions;
 
         public Songs()
