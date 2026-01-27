@@ -6,7 +6,6 @@ using System.Collections.Concurrent;
 using TagLib;
 using System.IO;
 using System.Threading.Tasks;
-using TagLib.Aac;
 
 namespace ApiSpotify.ENDPOINTS
 {
@@ -22,58 +21,72 @@ namespace ApiSpotify.ENDPOINTS
 
                 ConcurrentBag<Canco> canconsProcessades = new ConcurrentBag<Canco>();
 
-                var options = new ParallelOptions { MaxDegreeOfParallelism = 2 };
+                var opcions = new ParallelOptions
+                {
+                    MaxDegreeOfParallelism = 2
+                };
 
-                // Transformem la col·lecció a una llista per a poder-la iterar en Parallel.ForEach
-                var fileList = files.ToList();
-                
+                var llistaFitxers = files.ToList();
+
                 await Task.Run(() =>
                 {
-                    Parallel.ForEach(fileList, options, file =>
+                    Parallel.ForEach(llistaFitxers, opcions, file =>
                     {
-                        string tempPath = null;
                         try
                         {
-                            var tempFileName = Path.GetRandomFileName();
-                            tempPath = Path.Combine(Path.GetTempPath(), Path.ChangeExtension(tempFileName, ".mp3"));
+                            string rutaFitxer = SaveFile(file).Result;
 
-                            using (var fs = new FileStream(tempPath, FileMode.Create, FileAccess.Write, FileShare.None))
+                            using var tagFile = TagLib.File.Create(rutaFitxer);
+                            var tag = tagFile.Tag;
+                            var propietats = tagFile.Properties;
+
+                            var canco = new Canco
                             {
-                                file.CopyTo(fs);
-                            }
+                                Id = Guid.NewGuid(),
+                                Titol = string.IsNullOrWhiteSpace(tag.Title)
+                                    ? Path.GetFileNameWithoutExtension(file.FileName)
+                                    : tag.Title,
+                                Artista = (tag.Performers != null && tag.Performers.Length > 0)
+                                    ? tag.Performers[0]
+                                    : "Desconegut",
+                                Album = string.IsNullOrWhiteSpace(tag.Album)
+                                    ? "Desconegut"
+                                    : tag.Album,
+                                Durada = (decimal)propietats.Duration.TotalSeconds,
 
-                            using (var tagFile = TagLib.File.Create(tempPath))
-                            {
-                                var tag = tagFile.Tag;
-                                var props = tagFile.Properties;
+                            };
 
-                                var canco = new Canco
-                                {
-                                    Id = Guid.NewGuid(),
-                                    Titol = string.IsNullOrWhiteSpace(tag.Title) ? Path.GetFileNameWithoutExtension(file.FileName) : tag.Title,
-                                    Artista = (tag.Performers != null && tag.Performers.Length > 0) ? tag.Performers[0] : "Desconegut",
-                                    Album = string.IsNullOrWhiteSpace(tag.Album) ? "Desconegut" : tag.Album,
-                                    Durada = (decimal)props.Duration.TotalSeconds
-                                };
-
-                                canconsProcessades.Add(canco);
-
-                                //TODO: Es podria guardar canço a la base de dades
-                            }
+                            canconsProcessades.Add(canco);
                         }
                         catch (Exception ex)
                         {
                             Console.WriteLine($"Error processant {file.FileName}: {ex.Message}");
                         }
-                        
                     });
                 });
 
                 return Results.Ok(canconsProcessades);
             }).DisableAntiforgery();
-
-
         }
 
+
+        // FALTA canviar el nom per tal de que el nom sigui l'id de la canço i tambe falta que es guardi a la base de dades la ruta relativa de la carpeta UPLOADS/...
+        public static async Task<string> SaveFile(IFormFile fitxer)
+        {
+            string UPLOADS = Path.Combine(Directory.GetCurrentDirectory(), "UPLOADS");
+
+            if (!Directory.Exists(UPLOADS))
+                Directory.CreateDirectory(UPLOADS);
+
+            string nomFitxer = $"{Guid.NewGuid()}_{Path.GetFileName(fitxer.FileName)}";
+            string rutaFitxer = Path.Combine(UPLOADS, nomFitxer);
+
+            using (FileStream stream = new FileStream(rutaFitxer, FileMode.Create))
+            {
+                await fitxer.CopyToAsync(stream);
+            }
+
+            return rutaFitxer;
+        }
     }
 }
