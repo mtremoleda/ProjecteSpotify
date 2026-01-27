@@ -1,0 +1,15 @@
+C:\Users\User\Desktop\2DAM\ProjecteIntermodular\ProjecteSpotify\backEnd\Sockets\SocketsSportify\bin\Debug\net9.0\SocketsSportify.exe
+C:\Users\User\Desktop\2DAM\ProjecteIntermodular\ProjecteSpotify\backEnd\Sockets\SocketsSportify\bin\Debug\net9.0\SocketsSportify.deps.json
+C:\Users\User\Desktop\2DAM\ProjecteIntermodular\ProjecteSpotify\backEnd\Sockets\SocketsSportify\bin\Debug\net9.0\SocketsSportify.runtimeconfig.json
+C:\Users\User\Desktop\2DAM\ProjecteIntermodular\ProjecteSpotify\backEnd\Sockets\SocketsSportify\bin\Debug\net9.0\SocketsSportify.dll
+C:\Users\User\Desktop\2DAM\ProjecteIntermodular\ProjecteSpotify\backEnd\Sockets\SocketsSportify\bin\Debug\net9.0\SocketsSportify.pdb
+C:\Users\User\Desktop\2DAM\ProjecteIntermodular\ProjecteSpotify\backEnd\Sockets\SocketsSportify\obj\Debug\net9.0\SocketsSportify.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Desktop\2DAM\ProjecteIntermodular\ProjecteSpotify\backEnd\Sockets\SocketsSportify\obj\Debug\net9.0\SocketsSportify.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\2DAM\ProjecteIntermodular\ProjecteSpotify\backEnd\Sockets\SocketsSportify\obj\Debug\net9.0\SocketsSportify.AssemblyInfo.cs
+C:\Users\User\Desktop\2DAM\ProjecteIntermodular\ProjecteSpotify\backEnd\Sockets\SocketsSportify\obj\Debug\net9.0\SocketsSportify.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\2DAM\ProjecteIntermodular\ProjecteSpotify\backEnd\Sockets\SocketsSportify\obj\Debug\net9.0\SocketsSportify.sourcelink.json
+C:\Users\User\Desktop\2DAM\ProjecteIntermodular\ProjecteSpotify\backEnd\Sockets\SocketsSportify\obj\Debug\net9.0\SocketsSportify.dll
+C:\Users\User\Desktop\2DAM\ProjecteIntermodular\ProjecteSpotify\backEnd\Sockets\SocketsSportify\obj\Debug\net9.0\refint\SocketsSportify.dll
+C:\Users\User\Desktop\2DAM\ProjecteIntermodular\ProjecteSpotify\backEnd\Sockets\SocketsSportify\obj\Debug\net9.0\SocketsSportify.pdb
+C:\Users\User\Desktop\2DAM\ProjecteIntermodular\ProjecteSpotify\backEnd\Sockets\SocketsSportify\obj\Debug\net9.0\SocketsSportify.genruntimeconfig.cache
+C:\Users\User\Desktop\2DAM\ProjecteIntermodular\ProjecteSpotify\backEnd\Sockets\SocketsSportify\obj\Debug\net9.0\ref\SocketsSportify.dll
