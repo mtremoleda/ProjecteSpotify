@@ -40,10 +40,9 @@ namespace InterficieSpotify
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            PlayLists playlists = new PlayLists();
-            this.Close();
-            playlists.Show();
-
+            AssignPermisos assignacio = new AssignPermisos();
+            assignacio.ShowDialog(); // Bloqueja MainWindow fins que es tanqui
         }
+
     }
 }

@@ -8,5 +8,8 @@ namespace ApiSpotify.Validations.ValidatorADO
 {
     internal class RolValidator
     {
+        public void RolValidatorr() {
+            
+        }
     }
 }
