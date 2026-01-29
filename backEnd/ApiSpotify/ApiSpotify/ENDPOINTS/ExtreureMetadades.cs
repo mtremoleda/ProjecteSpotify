@@ -17,56 +17,64 @@ namespace ApiSpotify.ENDPOINTS
             app.MapPost("/cancons/upload", async ([FromForm] IFormFileCollection files) =>
             {
                 if (files == null || files.Count == 0)
-                    return Results.BadRequest(new { message = "No s'ha rebut cap fitxer." });
+                    return Results.BadRequest("No s'ha rebut cap fitxer.");
 
-                ConcurrentBag<Canco> canconsProcessades = new ConcurrentBag<Canco>();
-
-                var opcions = new ParallelOptions
+                var tasques = files.Select(async file =>
                 {
-                    MaxDegreeOfParallelism = 2
-                };
-
-                var llistaFitxers = files.ToList();
-
-                await Task.Run(() =>
-                {
-                    Parallel.ForEach(llistaFitxers, opcions, file =>
+                    try
                     {
-                        try
+                        // 1️⃣ Generem ID de la cançó
+                        Guid songId = Guid.NewGuid();
+
+                        // 2️⃣ Guardem el fitxer amb nom GUID.ext
+                        string rutaRelativa = await SaveFile(file, songId);
+
+                        // 3️⃣ Llegim metadades
+                        using var tagFile = TagLib.File.Create(
+                            Path.Combine(Directory.GetCurrentDirectory(), rutaRelativa)
+                        );
+
+                        var tag = tagFile.Tag;
+                        var props = tagFile.Properties;
+
+                        // 4️⃣ Creem la cançó (sense URL)
+                        var canco = new Canco
                         {
-                            string rutaFitxer = SaveFile(file).Result;
+                            Id = songId,
+                            Titol = string.IsNullOrWhiteSpace(tag.Title)
+                                ? Path.GetFileNameWithoutExtension(file.FileName)
+                                : tag.Title,
+                            Artista = tag.Performers?.FirstOrDefault() ?? "Desconegut",
+                            Album = string.IsNullOrWhiteSpace(tag.Album) ? "Desconegut" : tag.Album,
+                            Durada = (decimal)props.Duration.TotalSeconds
+                        };
 
-                            using var tagFile = TagLib.File.Create(rutaFitxer);
-                            var tag = tagFile.Tag;
-                            var propietats = tagFile.Properties;
-
-                            var canco = new Canco
-                            {
-                                Id = Guid.NewGuid(),
-                                Titol = string.IsNullOrWhiteSpace(tag.Title)
-                                    ? Path.GetFileNameWithoutExtension(file.FileName)
-                                    : tag.Title,
-                                Artista = (tag.Performers != null && tag.Performers.Length > 0)
-                                    ? tag.Performers[0]
-                                    : "Desconegut",
-                                Album = string.IsNullOrWhiteSpace(tag.Album)
-                                    ? "Desconegut"
-                                    : tag.Album,
-                                Durada = (decimal)propietats.Duration.TotalSeconds,
-
-                            };
-
-                            canconsProcessades.Add(canco);
-                        }
-                        catch (Exception ex)
+                        // 5️⃣ Creem URLSong (AQUÍ va la ruta)
+                        var urlSong = new URLSong
                         {
-                            Console.WriteLine($"Error processant {file.FileName}: {ex.Message}");
-                        }
-                    });
+                            SongId = songId,
+                            Url = rutaRelativa
+                        };
+
+                        // 6️⃣ Guardar a BD
+                        // dbConn.Insert(canco);
+                        // dbConn.Insert(urlSong);
+
+                        return new { canco, urlSong };
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error processant {file.FileName}: {ex.Message}");
+                        return null;
+                    }
                 });
 
-                return Results.Ok(canconsProcessades);
+                var resultat = (await Task.WhenAll(tasques))
+                    .Where(r => r != null);
+
+                return Results.Ok(resultat);
             }).DisableAntiforgery();
+
         }
 
 
