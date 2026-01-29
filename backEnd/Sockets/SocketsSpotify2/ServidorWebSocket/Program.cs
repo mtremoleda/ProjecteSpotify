@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Net.WebSockets;
 using System.Text;
-using System.Collections.Concurrent; // Añadido para almacenar clientes
+using System.Collections.Concurrent;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +21,7 @@ app.Map("/ws", async context =>
     if (context.WebSockets.IsWebSocketRequest)
     {
         var webSocket = await context.WebSockets.AcceptWebSocketAsync();
-        string userName = $"Usuario-{Guid.NewGuid()}"; // Nombre por defecto
+        string userName = $"Usuario-{Guid.NewGuid()}";
         clients.TryAdd(webSocket, userName);
 
         Console.WriteLine($"Cliente conectado: {userName}");
@@ -36,7 +36,6 @@ app.Map("/ws", async context =>
                 {
                     var message = Encoding.UTF8.GetString(buffer, 0, result.Count);
 
-                    // Comando para cambiar nombre de usuario
                     if (message.StartsWith("USUARIO:"))
                     {
                         string newName = message.Substring(8);
@@ -44,11 +43,14 @@ app.Map("/ws", async context =>
                         Console.WriteLine($"{userName} ahora se llama {newName}");
                         userName = newName;
                     }
-                    // Comando para enviar canción
                     else if (message.StartsWith("CANCION:"))
                     {
                         string song = message.Substring(8);
                         Console.WriteLine($"✅ {userName} está reproduciendo: {song}");
+
+                        // Enviar a todos los clientes conectados
+                        var broadcastMessage = $"{userName} está reproduciendo: {song}";
+                        BroadcastMessage(broadcastMessage);
                     }
                 }
             }
@@ -69,5 +71,25 @@ app.Map("/ws", async context =>
         context.Response.StatusCode = 400;
     }
 });
+
+void BroadcastMessage(string message)
+{
+    var messageBytes = Encoding.UTF8.GetBytes(message);
+
+    foreach (var client in clients.Keys.ToList())
+    {
+        if (client.State == WebSocketState.Open)
+        {
+            try
+            {
+                client.SendAsync(new ArraySegment<byte>(messageBytes), WebSocketMessageType.Text, true, CancellationToken.None);
+            }
+            catch
+            {
+                // Ignorar errores al enviar a clientes que ya se hayan desconectado
+            }
+        }
+    }
+}
 
 app.Run("http://0.0.0.0:5085");
