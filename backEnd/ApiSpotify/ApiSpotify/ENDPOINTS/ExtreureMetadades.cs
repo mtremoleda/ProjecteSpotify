@@ -71,22 +71,25 @@ namespace ApiSpotify.ENDPOINTS
 
 
         // FALTA canviar el nom per tal de que el nom sigui l'id de la canço i tambe falta que es guardi a la base de dades la ruta relativa de la carpeta UPLOADS/...
-        public static async Task<string> SaveFile(IFormFile fitxer)
+        public static async Task<string> SaveFile(IFormFile fitxer, Guid cancoId)
         {
             string UPLOADS = Path.Combine(Directory.GetCurrentDirectory(), "UPLOADS");
 
             if (!Directory.Exists(UPLOADS))
                 Directory.CreateDirectory(UPLOADS);
 
-            string nomFitxer = $"{Guid.NewGuid()}_{Path.GetFileName(fitxer.FileName)}";
-            string rutaFitxer = Path.Combine(UPLOADS, nomFitxer);
+            string extensio = Path.GetExtension(fitxer.FileName); // .mp3
+            string nomFitxer = $"{cancoId}{extensio}";
+            string rutaCompleta = Path.Combine(UPLOADS, nomFitxer);
 
-            using (FileStream stream = new FileStream(rutaFitxer, FileMode.Create))
+            using (FileStream stream = new FileStream(rutaCompleta, FileMode.Create))
             {
                 await fitxer.CopyToAsync(stream);
             }
 
-            return rutaFitxer;
+            // 👉 retornem RUTA RELATIVA
+            return Path.Combine("UPLOADS", nomFitxer);
         }
+
     }
 }

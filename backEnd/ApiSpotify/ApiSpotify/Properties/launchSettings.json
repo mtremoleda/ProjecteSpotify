@@ -7,12 +7,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       //"applicationUrl": "https://localhost:56832;http://localhost:56833"
-<<<<<<< HEAD
-      "applicationUrl": "https://localhost:7080;http://localhost:5080;http://172.23.59.75:5000"
-=======
       "applicationUrl": "https://localhost:7080;http://localhost:5080;http://172.23.58.247:5080"
->>>>>>> 5e564e084bbf2838e354eb8df2ff4e843e976b49
-
     }
   }
 }
