@@ -1,116 +1,85 @@
-﻿using ApiSpotify.MODELS;
+﻿using ApiSpotify.DTO;
+using ApiSpotify.MODELS;
 using ApiSpotify.Services;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using System.Reflection;
 
 namespace ApiSpotify.REPOSITORY
 {
     public class DAOLlistaReproduccioCanco
     {
-        public static void Insert(DatabaseConnection dbConn, LlistaReproduccioCanco relacio)
+        public static List<LlistaReproduccioCancoResponse> GetCanconsByLlistaId(
+            DatabaseConnection dbConn,
+            Guid llistaId)
         {
+            List<LlistaReproduccioCancoResponse> cancons = new();
+
             dbConn.Open();
 
-            string sql = @"INSERT INTO Playlist_song (Id, id_song, id_playlist)
-                           VALUES (@Id, @id_song, @id_playlist)";
+            string sql = @"
+                SELECT s.Id, s.titol, s.artista, s.album, s.durada
+                FROM Playlist_song ps
+                INNER JOIN Songs s ON ps.id_song = s.Id
+                WHERE ps.id_playlist = @llistaId";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
-            cmd.Parameters.AddWithValue("@Id", relacio.Id);
-            cmd.Parameters.AddWithValue("@id_song", relacio.IdCanco);
-            cmd.Parameters.AddWithValue("@id_playlist", relacio.IdLlista);
+            cmd.Parameters.AddWithValue("@llistaId", llistaId);
 
-            int rows = cmd.ExecuteNonQuery();
-            Console.WriteLine($"{rows} fila inserida.");
-
-            dbConn.Close();
-        }
-
-        public static List<LlistaReproduccioCanco> GetAll(DatabaseConnection dbConn)
-        {
-            List<LlistaReproduccioCanco> relacions = new();
-            dbConn.Open();
-
-            string sql = "SELECT Id, id_song, id_playlist FROM Playlist_song";
-
-            using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
             using SqlDataReader reader = cmd.ExecuteReader();
 
             while (reader.Read())
             {
-                relacions.Add(new LlistaReproduccioCanco
+                cancons.Add(new LlistaReproduccioCancoResponse
                 {
                     Id = reader.GetGuid(0),
-                    IdCanco = reader.GetGuid(1),
-                    IdLlista = reader.GetGuid(2)
+                    Titol = reader.GetString(1),
+                    Artista = reader.GetString(2),
+                    Album = reader.GetString(3),
+                    Durada = reader.GetDecimal(4)
                 });
             }
 
             dbConn.Close();
-            return relacions;
+            return cancons;
         }
 
-        public static LlistaReproduccioCanco? GetById(DatabaseConnection dbConn, Guid id)
+        // Nuevo método: Añadir canción a playlist
+        public static void AddSongToPlaylist(DatabaseConnection dbConn, PlaylistSong playlistSong)
         {
             dbConn.Open();
 
-            string sql = "SELECT Id, id_song, id_playlist FROM Playlist_song WHERE Id = @Id";
+            string sql = @"
+                INSERT INTO Playlist_song (Id, id_song, id_playlist)
+                VALUES (@Id, @IdSong, @IdPlaylist)";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
-            cmd.Parameters.AddWithValue("@Id", id);
+            cmd.Parameters.AddWithValue("@Id", playlistSong.Id);
+            cmd.Parameters.AddWithValue("@IdSong", playlistSong.IdSong);
+            cmd.Parameters.AddWithValue("@IdPlaylist", playlistSong.IdPlaylist);
 
-            using SqlDataReader reader = cmd.ExecuteReader();
-            LlistaReproduccioCanco? relacio = null;
-
-            if (reader.Read())
-            {
-                relacio = new LlistaReproduccioCanco
-                {
-                    Id = reader.GetGuid(0),
-                    IdCanco = reader.GetGuid(1),
-                    IdLlista = reader.GetGuid(2)
-                };
-            }
-
-            dbConn.Close();
-            return relacio;
-        }
-
-        public static void Update(DatabaseConnection dbConn, LlistaReproduccioCanco rel)
-        {
-            dbConn.Open();
-
-            string sql = @"UPDATE Playlist_song
-                           SET id_playlist = @id_playlist,
-                               id_song = @id_song,
-                           WHERE Id = @Id";
-
-            using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
-            cmd.Parameters.AddWithValue("@Id", rel.Id);
-            cmd.Parameters.AddWithValue("@id_song", rel.IdCanco);
-            cmd.Parameters.AddWithValue("@id_playlist", rel.IdLlista);
-
-            int rows = cmd.ExecuteNonQuery();
-            Console.WriteLine($"{rows} fila actualitzada.");
+            cmd.ExecuteNonQuery();
 
             dbConn.Close();
         }
-        
-        public static bool Delete(DatabaseConnection dbConn, Guid id)
+
+        // Nuevo método: Eliminar canción de playlist
+        public static void RemoveSongFromPlaylist(DatabaseConnection dbConn, Guid playlistId, Guid songId)
         {
             dbConn.Open();
 
-            string sql = @"DELETE FROM Playlist_song WHERE Id = @Id";
+            string sql = @"
+                DELETE FROM Playlist_song
+                WHERE id_playlist = @playlistId AND id_song = @songId";
 
             using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
-            cmd.Parameters.AddWithValue("@Id", id);
+            cmd.Parameters.AddWithValue("@playlistId", playlistId);
+            cmd.Parameters.AddWithValue("@songId", songId);
 
-            int rows = cmd.ExecuteNonQuery();
+            cmd.ExecuteNonQuery();
 
             dbConn.Close();
-
-            return rows > 0;
         }
     }
 }

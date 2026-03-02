@@ -1,9 +1,9 @@
 ﻿namespace ApiSpotify.MODELS
 {
-    public class LlistaReproduccioCanco
+    public class PlaylistSong
     {
         public Guid Id { get; set; } = Guid.NewGuid();
-        public Guid IdCanco { get; set; }
-        public Guid IdLlista { get; set; }
+        public Guid IdSong { get; set; }
+        public Guid IdPlaylist { get; set; }
     }
 }

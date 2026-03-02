@@ -73,11 +73,14 @@ webApp.UseAuthentication();
 webApp.MapCancoEndpoints(dbConn);
 webApp.MapUsuarisEndpoints(dbConn);
 webApp.MapLlistesReproduccionsEndpoints(dbConn);
-webApp.MapLlistareproduccioCancoEndpointsEndpoints(dbConn);
+webApp.MapLlistaReproduccioCancoEndpoints(dbConn);
 webApp.MapQualitatsFitxersEndpoints(dbConn);
 webApp.MapExtreureMetadadesEndpoints(dbConn);
 webApp.MapRolEndpoints(dbConn);
 webApp.MaploginEndpoints(dbConn);
+
+
+
 
 
 webApp.Run();
