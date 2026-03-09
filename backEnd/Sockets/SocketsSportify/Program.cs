@@ -7,7 +7,7 @@ using System.Threading;
 
 class ServidorMusica
 {
-    private const int PORT = 5081;
+    private const int PORT = 5083;
     private static Socket serverSocket;
     private static List<ClientInfo> clients = new List<ClientInfo>();
     private static object lockObj = new object();
@@ -26,7 +26,7 @@ class ServidorMusica
         serverSocket.Bind(new IPEndPoint(IPAddress.Any, PORT));
         serverSocket.Listen(10);
 
-        Console.WriteLine($"Servidor de música escuchando en puerto {PORT}");
+        Console.WriteLine($"Servidor de musica escoltant al port: {PORT}");
 
         while (true)
         {
@@ -45,8 +45,8 @@ class ServidorMusica
         var client = new ClientInfo
         {
             Socket = clientSocket,
-            Name = $"Cliente-{Guid.NewGuid()}",
-            Song = "Ninguna"
+            Name = $"Client-{Guid.NewGuid()}",
+            Song = "Cap"
         };
 
         lock (lockObj)
@@ -54,7 +54,7 @@ class ServidorMusica
             clients.Add(client);
         }
 
-        Console.WriteLine($"Cliente conectado: {client.Name}");
+        Console.WriteLine($"Client conectat: {client.Name}");
 
         try
         {
@@ -66,19 +66,19 @@ class ServidorMusica
 
                 string message = Encoding.UTF8.GetString(buffer, 0, bytes).Trim();
 
-                if (message.StartsWith("NOMBRE:"))
+                if (message.StartsWith("NOM:"))
                 {
                     string name = message.Substring(7);
                     client.Name = name;
-                    Console.WriteLine($"{client.Name} se ha identificado.");
+                    Console.WriteLine($"{client.Name} s'ha identificat.");
                 }
-                else if (message.StartsWith("CANCION:"))
+                else if (message.StartsWith("CANCO:"))
                 {
                     string song = message.Substring(8);
                     client.Song = song;
-                    Console.WriteLine($"{client.Name} está reproduciendo: {song}");
+                    Console.WriteLine($"{client.Name} esta reproduint: {song}");
                 }
-                else if (message == "LISTAR")
+                else if (message == "LLISTAR")
                 {
                     SendClientList(clientSocket);
                 }
@@ -95,7 +95,7 @@ class ServidorMusica
                 clients.Remove(client);
             }
             clientSocket.Close();
-            Console.WriteLine($"Cliente desconectado: {client.Name}");
+            Console.WriteLine($"Client desconectat: {client.Name}");
         }
     }
 
@@ -104,7 +104,7 @@ class ServidorMusica
         try
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("--- CLIENTES CONECTADOS ---");
+            sb.AppendLine("--- CLIENTS CONECTATS ---");
             lock (lockObj)
             {
                 foreach (var c in clients)

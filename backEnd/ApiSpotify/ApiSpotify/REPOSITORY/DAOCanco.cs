@@ -1,6 +1,7 @@
 ﻿using ApiSpotify.MODELS;
 using ApiSpotify.Services;
 using Microsoft.Data.SqlClient;
+using ApiSpotify.DOMAIN.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -56,6 +57,26 @@ namespace ApiSpotify.REPOSITORY
 
             dbconn.Close();
             return canco;
+        }
+
+        //INSERT PER ENTITY
+        public static void InsertCancoEntity(DatabaseConnection dbConn, CancoEntity cancoEntity)
+        {
+            dbConn.Open();
+
+            string sql = @"INSERT INTO Carros (Id, Titol, Album, Artista, Durada)
+                           VALUES (@Id, @Titol, @Album, @Artista, @Durada)";
+
+            using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+            cmd.Parameters.AddWithValue("@Id", cancoEntity.Id);
+            cmd.Parameters.AddWithValue("@Titol", cancoEntity.Titol);
+            cmd.Parameters.AddWithValue("@Album", cancoEntity.Album);
+            cmd.Parameters.AddWithValue("@Artista", cancoEntity.Artista);
+            cmd.Parameters.AddWithValue("@Durada", cancoEntity.Durada);
+
+            int rows = cmd.ExecuteNonQuery();
+            Console.WriteLine($"{rows} fila inserida.");
+            dbConn.Close();
         }
 
         public static Canco GetById(DatabaseConnection dbConn, Guid id)

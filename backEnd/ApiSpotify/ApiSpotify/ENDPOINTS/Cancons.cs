@@ -1,9 +1,10 @@
 ﻿using ApiSpotify.Common;
+using ApiSpotify.DOMAIN.Entities;
 using ApiSpotify.DTO;
 using ApiSpotify.MODELS;
 using ApiSpotify.REPOSITORY;
 using ApiSpotify.Services;
-using ApiSpotify.Validations;
+using ApiSpotify.DOMAIN.Validators;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -44,7 +45,7 @@ namespace ApiSpotify.ENDPOINTS
                     : Results.NotFound(new { message = $"Canco with Id {id} not found." });
             });
 
-            
+
 
             // POST /cancons
             app.MapPost("/Cancons", ([FromBody] CancoRequest req) =>
@@ -56,7 +57,8 @@ namespace ApiSpotify.ENDPOINTS
                  if (!PermisosHelper.UsuariTePermis(usuari, "AfegirCanco"))
                      return Results.Forbid();*/
 
-                Result result = SongsValidator.Validate(req);
+                Canco canco = req.ToCanco();
+                Result result = CancoValidator.Validate(canco);
                 if (!result.IsOk)
                 {
                     return Results.BadRequest(new
@@ -66,16 +68,16 @@ namespace ApiSpotify.ENDPOINTS
                     });
                 }
 
-                Canco canco = new Canco
-                {
-                    Id = Guid.NewGuid(),
-                    Titol = req.Titol,
-                    Artista = req.Artista,
-                    Album = req.Album,
-                    Durada = req.Durada
-                };
+           
 
-                DAOCanco.Insert(dbConn, canco);
+                Guid IdCanco = Guid.NewGuid();
+
+                //DAOCanco.Insert(dbConn, canco);
+
+                CancoEntity cancoEntity = CancoMapper.ToEntity(IdCanco, canco);
+
+                DAOCanco.InsertCancoEntity(dbConn, cancoEntity);
+
 
                 return Results.Created($"/cancons/{canco.Id}", canco);
 
@@ -97,7 +99,7 @@ namespace ApiSpotify.ENDPOINTS
 
                  if (!potEditar) return Results.Forbid();*/
 
-                Result result = SongsValidator.Validate(req);
+                Result result = SValidator.Validate(req);
                 if (!result.IsOk)
                 {
                     return Results.BadRequest(new
@@ -139,4 +141,4 @@ namespace ApiSpotify.ENDPOINTS
 }
 
     // DTO pel request
-    public record CancoRequest(String Titol, string Artista, string Album, decimal Durada);
+    //public record CancoRequest(String Titol, string Artista, string Album, decimal Durada);

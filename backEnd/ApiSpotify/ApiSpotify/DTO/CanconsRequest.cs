@@ -2,24 +2,30 @@
 
     //Post
 using ApiSpotify.MODELS;
+using System.Net.Sockets;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace ApiSpotify.DTO;
 
-    public record CanconsRequest(string Titol, string Artista, string Album, Decimal Durada)
+    public record CancoRequest(string Titol, string Artista, string Album, Decimal Durada)
     {
         // Guanyem CONTROL sobre com es fa la conversió
 
-        public Canco ToProduct(Guid id)   // Conversió a model
+        public Canco ToCanco()   // Conversió a model
         {
-            return new Canco
-            {
-                Id = id,
-                Titol = Titol,
-                Artista = Artista,
-                Album = Album,
-                Durada = Durada
-            };
+
+            Canco cancoDomain = new Canco();
+
+        
+            cancoDomain.Titol = Titol;
+            cancoDomain.Artista = Artista;
+            cancoDomain.Album = Album;
+            cancoDomain.Durada = Durada;
+
+            return cancoDomain;
+        
+
         }
     }
 
