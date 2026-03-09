@@ -22,12 +22,14 @@ namespace ApiSpotify.ENDPOINTS
             // GET ALL
             app.MapGet("/cancons", () =>
             {
-                List<CanconsResponse> canconsResponses = new List<CanconsResponse>();
                 List<Canco> cancons = DAOCanco.GetAll(dbConn);
+                List<CanconsResponse> canconsResponses = new List<CanconsResponse>();
+                
 
-                foreach (Canco c in cancons)
+                foreach (Canco canco in cancons)
                 {
-                    canconsResponses.Add(CanconsResponse.FromProduct(c));
+                    CancoEntity cancoEntity = CancoMapper.ToDomain(canco);
+                    canconsResponses.Add(CanconsResponse.FromProduct(cancoEntity));
 
                 }
 
@@ -35,16 +37,31 @@ namespace ApiSpotify.ENDPOINTS
 
             });
 
+            //app.MapGet("/products", (IProductRepo productADO, int? total) =>
+            //{
+            //    int limit = total ?? 20;
+
+            //    List<ProductEntity> products = productADO.GetAll(limit);
+            //    List<ProductResponse> productsResponse = new List<ProductResponse>();
+            //    foreach (ProductEntity productEntity in products)
+            //    {
+            //        Product product = ProductMapper.ToDomain(productEntity);
+            //        productsResponse.Add(ProductResponse.FromProduct(product));
+            //    }
+
+            //    return Results.Ok(productsResponse);
+            //}).WithTags("Products");
+
             // GET BY ID
             app.MapGet("/cancons/{id}", (Guid id) =>
             {
                 Canco? canco = DAOCanco.GetById(dbConn, id);
+                CancoEntity cancoEntity = CancoMapper.ToDomain(canco);
 
                 return canco is not null
-                    ? Results.Ok(CanconsResponse.FromProduct(canco))
+                    ? Results.Ok(CanconsResponse.FromProduct(cancoEntity))
                     : Results.NotFound(new { message = $"Canco with Id {id} not found." });
             });
-
 
 
             // POST /cancons
@@ -56,8 +73,8 @@ namespace ApiSpotify.ENDPOINTS
 
                  if (!PermisosHelper.UsuariTePermis(usuari, "AfegirCanco"))
                      return Results.Forbid();*/
-                Guid IdCanco = Guid.NewGuid();
-                CancoEntity cancoEntity = req.ToCanco(IdCanco);
+                Guid Id = Guid.NewGuid();
+                CancoEntity cancoEntity = req.ToCanco(Id);
                 Result result = CancoValidator.Validate(cancoEntity);
                 if (!result.IsOk)
                 {
@@ -68,25 +85,17 @@ namespace ApiSpotify.ENDPOINTS
                     });
                 }
 
-           
-
-                
-
-                //DAOCanco.Insert(dbConn, canco);
-
                 Canco canco = CancoMapper.ToEntity(cancoEntity);
                 DAOCanco.Insert(dbConn, canco);
 
 
                 return Results.Created($"/cancons/{canco.Id}", canco);
 
-
-
             });
 
-            app.MapPut("/cancons/{id}", (Guid IdCanco, CancoRequest req) =>
+            app.MapPut("/cancons/{id}", (Guid Id, CancoRequest req) =>
             {
-                var existing = DAOCanco.GetById(dbConn, IdCanco);
+                var existing = DAOCanco.GetById(dbConn, Id);
                 if (existing == null)
                     return Results.NotFound();
 
@@ -98,7 +107,7 @@ namespace ApiSpotify.ENDPOINTS
 
                  if (!potEditar) return Results.Forbid();*/
 
-                CancoEntity cancoEntity = req.ToCanco(IdCanco);
+                CancoEntity cancoEntity = req.ToCanco(Id);
                 Result result = CancoValidator.Validate(cancoEntity);
                 if (!result.IsOk)
                 {
@@ -109,22 +118,10 @@ namespace ApiSpotify.ENDPOINTS
                     });
                 }
 
-                //Canco updated = new Canco
-                //{
-                //    Id = id,
-                //    Titol = req.Titol,
-                //    Artista = req.Artista,
-                //    Album = req.Album,
-                //    Durada = req.Durada
-                //};
-
                 Canco cancoUpdt = CancoMapper.ToEntity(cancoEntity);
                 DAOCanco.Update(dbConn, cancoUpdt);
                 return Results.Ok(cancoUpdt);
 
-
-                //ProductEntity productUpdt = ProductMapper.ToEntity(product);
-                //productADO.Update(productUpdt);
             });
 
             //Delete

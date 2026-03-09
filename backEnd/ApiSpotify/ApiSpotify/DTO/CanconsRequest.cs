@@ -14,18 +14,12 @@ namespace ApiSpotify.DTO;
     {
         
 
-        public CancoEntity ToCanco(Guid IdCanco)   
+        public CancoEntity ToCanco(Guid Id)   
         {
 
-            CancoEntity cancoEntity = new CancoEntity();
+            CancoEntity cancoEntity = new CancoEntity(Id, Titol, Artista, Album, Durada);
 
-                cancoEntity.Id = IdCanco;
-                cancoEntity.Titol = Titol;
-                cancoEntity.Artista = Artista;
-                cancoEntity.Album = Album;
-                cancoEntity.Durada = Durada;
-
-                return cancoEntity;
+            return cancoEntity;
         
 
         }
