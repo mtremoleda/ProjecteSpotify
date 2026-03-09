@@ -56,9 +56,9 @@ namespace ApiSpotify.ENDPOINTS
 
                  if (!PermisosHelper.UsuariTePermis(usuari, "AfegirCanco"))
                      return Results.Forbid();*/
-
-                Canco canco = req.ToCanco();
-                Result result = CancoValidator.Validate(canco);
+                Guid IdCanco = Guid.NewGuid();
+                CancoEntity cancoEntity = req.ToCanco(IdCanco);
+                Result result = CancoValidator.Validate(cancoEntity);
                 if (!result.IsOk)
                 {
                     return Results.BadRequest(new
@@ -70,13 +70,12 @@ namespace ApiSpotify.ENDPOINTS
 
            
 
-                Guid IdCanco = Guid.NewGuid();
+                
 
                 //DAOCanco.Insert(dbConn, canco);
 
-                CancoEntity cancoEntity = CancoMapper.ToEntity(IdCanco, canco);
-
-                DAOCanco.InsertCancoEntity(dbConn, cancoEntity);
+                Canco canco = CancoMapper.ToEntity(cancoEntity);
+                DAOCanco.Insert(dbConn, canco);
 
 
                 return Results.Created($"/cancons/{canco.Id}", canco);
@@ -85,9 +84,9 @@ namespace ApiSpotify.ENDPOINTS
 
             });
 
-            app.MapPut("/cancons/{id}", (Guid id, CancoRequest req) =>
+            app.MapPut("/cancons/{id}", (Guid IdCanco, CancoRequest req) =>
             {
-                var existing = DAOCanco.GetById(dbConn, id);
+                var existing = DAOCanco.GetById(dbConn, IdCanco);
                 if (existing == null)
                     return Results.NotFound();
 
@@ -99,7 +98,8 @@ namespace ApiSpotify.ENDPOINTS
 
                  if (!potEditar) return Results.Forbid();*/
 
-                Result result = SValidator.Validate(req);
+                CancoEntity cancoEntity = req.ToCanco(IdCanco);
+                Result result = CancoValidator.Validate(cancoEntity);
                 if (!result.IsOk)
                 {
                     return Results.BadRequest(new
@@ -109,17 +109,22 @@ namespace ApiSpotify.ENDPOINTS
                     });
                 }
 
-                Canco updated = new Canco
-                {
-                    Id = id,
-                    Titol = req.Titol,
-                    Artista = req.Artista,
-                    Album = req.Album,
-                    Durada = req.Durada
-                };
+                //Canco updated = new Canco
+                //{
+                //    Id = id,
+                //    Titol = req.Titol,
+                //    Artista = req.Artista,
+                //    Album = req.Album,
+                //    Durada = req.Durada
+                //};
 
-                DAOCanco.Update(dbConn, updated);
-                return Results.Ok(updated);
+                Canco cancoUpdt = CancoMapper.ToEntity(cancoEntity);
+                DAOCanco.Update(dbConn, cancoUpdt);
+                return Results.Ok(cancoUpdt);
+
+
+                //ProductEntity productUpdt = ProductMapper.ToEntity(product);
+                //productADO.Update(productUpdt);
             });
 
             //Delete
