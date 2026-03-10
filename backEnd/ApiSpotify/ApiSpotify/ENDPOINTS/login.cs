@@ -11,10 +11,17 @@ namespace ApiSpotify.ENDPOINTS
     {
         public static void MaploginEndpoints(this WebApplication app, DatabaseConnection dbConn)
         {
-            app.MapPost("/login", ([FromBody] login req) =>
+            app.MapPost("/login", ([FromBody] login req, JswTokenService jwtService) =>
             {
                 // Buscar usuari per nom
                 Usuari user = DAOUsuari.GetByNom(dbConn, req.nom);
+                List<Rol> rol = DAOUsersRols.GetUserRols(dbConn, user.Id);
+                List<String> rols = new List<String>();
+
+                foreach(Rol r in rol)
+                {
+                    rols.Add(r.Nom);
+                }
 
                 if (user == null)
                     return Results.Unauthorized();
@@ -29,7 +36,17 @@ namespace ApiSpotify.ENDPOINTS
                 if (!valid)
                     return Results.Unauthorized();
 
-                return Results.Ok(new { message = "Login correcte", userId = user.Id });
+
+                return Results.Ok(jwtService.GenerateToken(
+                userId: user.Id.ToString(),
+                nom: user.Nom,
+                issuer: "Spotify",
+                rols: rols,
+                audience: "public",
+                lifetime: TimeSpan.FromHours(2)
+                ));
+
+                //return Results.Ok(new { message = "Login correcte", userId = user.Id });
             });
 
         }

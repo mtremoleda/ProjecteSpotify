@@ -5,6 +5,7 @@ using ApiSpotify.MODELS;
 using ApiSpotify.REPOSITORY;
 using ApiSpotify.Services;
 using ApiSpotify.Validations;
+using System.Security.Claims;
 
 
 
@@ -14,9 +15,22 @@ namespace ApiSpotify.ENDPOINTS
     {
         public static void MapUsuarisEndpoints(this WebApplication app, DatabaseConnection dbConn)
         {
+
+
             // GET /usuaris
-            app.MapGet("/usuaris", () =>
+            app.MapGet("/usuaris", (ClaimsPrincipal user) =>
             {
+                if (!user.Identity?.IsAuthenticated ?? true)
+                    return Results.Unauthorized();
+                bool esAdmin = user.IsInRole("Administrador");
+
+                if (!esAdmin)
+                {
+                    return Results.Forbid();
+
+                }
+
+
                 List<Usuari> usuaris = DAOUsuari.GetAll(dbConn);
                 List<UsuariResponse> usuariResponses = new List<UsuariResponse>();
 

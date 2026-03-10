@@ -79,6 +79,34 @@ namespace ApiSpotify.REPOSITORY
             return relacio;
         }
 
+        public static List<Rol> GetUserRols(DatabaseConnection dbConn, Guid id)
+        {
+            dbConn.Open();
+            List<Rol> rols = new();
+
+            string sql = "SELECT Rols.* FROM UsersRols inner join Rols on Rolid = Rols.Id WHERE UserId = @Id";
+
+            using SqlCommand cmd = new SqlCommand(sql, dbConn.sqlConnection);
+            cmd.Parameters.AddWithValue("@Id", id);
+            using SqlDataReader reader = cmd.ExecuteReader();
+            
+
+            while (reader.Read())
+            {
+                rols.Add(new Rol
+                {
+                    Id = reader.GetGuid(0),
+                    Codi = reader.GetString(1),
+                    Nom = reader.GetString(2),
+                    Descripcio = reader.GetString(3)
+                });
+            }
+
+            dbConn.Close();
+            return rols;
+
+        }
+
         public static void Update(DatabaseConnection dbConn, UsersRols rel)
         {
             dbConn.Open();

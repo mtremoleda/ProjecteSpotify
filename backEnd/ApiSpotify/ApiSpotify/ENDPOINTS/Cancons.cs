@@ -141,6 +141,3 @@ namespace ApiSpotify.ENDPOINTS
         }
     }
 }
-
-    // DTO pel request
-    //public record CancoRequest(String Titol, string Artista, string Album, decimal Durada);

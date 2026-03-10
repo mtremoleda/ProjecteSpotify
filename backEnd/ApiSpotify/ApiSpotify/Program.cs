@@ -23,6 +23,9 @@ using ApiSpotify.Services;
 using ApiSpotify.ENDPOINTS;
 using Microsoft.Extensions.Configuration;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +38,9 @@ builder.Configuration
 
 // Afegim Swagger
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddScoped<JswTokenService>();
+
+
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
@@ -44,6 +50,33 @@ builder.Services.AddSwaggerGen(options =>
         Description = "API minimal per gestionar cançons, usuaris i llistes de reproducció."
     });
 });
+
+// JSON Web Token
+
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey =
+                new SymmetricSecurityKey(
+                    Encoding.UTF8.GetBytes(builder.Configuration["Jwt:JwtSecretKey"]!)
+                ),
+
+            ValidateIssuer = true,
+            ValidIssuer = "Spotify",
+
+            ValidateAudience = true,
+            ValidAudience = "public",
+
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.FromSeconds(30)
+        };
+    });
+
+builder.Services.AddAuthorization();
 
 // Connexió a la base de dades
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection")!;
