@@ -5,17 +5,74 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InterficieSpotify"
         mc:Ignorable="d"
-        Title="LogIn" Height="450" Width="800">
-    <Grid x:Name="gridprincipal">
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="Black"/>
-                <GradientStop Color="#FF4FDAF9" Offset="1"/>
-                <GradientStop Color="#FF010505"/>
-            </LinearGradientBrush>
-        </Grid.Background>
-        <Button x:Name="entrar" Content="Entrar" HorizontalAlignment="Center" Height="55" Margin="0,325,0,0" VerticalAlignment="Top" Width="240" Click="Button_Click" FontSize="18"/>
-        <TextBox x:Name="username" HorizontalAlignment="Center" Height="55" Margin="0,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="240" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" Padding="0,-2,0,0" Background="#FFB4FFFE"/>
-        <PasswordBox x:Name="password" HorizontalAlignment="Center" Height="55" Margin="0,217,0,0" VerticalAlignment="Top" Width="240" FontSize="18" Background="#FFB4FFFE" />
+        Title="Login"
+        Height="450"
+        Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="#121212">
+
+    <Grid>
+
+        <!-- Tarjeta central -->
+        <Border Width="320"
+                Height="300"
+                Background="#1E1E1E"
+                CornerRadius="10"
+                Padding="25"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+
+            <StackPanel>
+
+                <!-- Título -->
+                <TextBlock Text="Iniciar Sesión"
+                           FontSize="26"
+                           Foreground="White"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,25"/>
+
+                <!-- Usuario -->
+                <TextBlock Text="Usuario"
+                           Foreground="White"
+                           Margin="0,0,0,5"/>
+
+                <TextBox x:Name="username"
+                         Height="40"
+                         FontSize="16"
+                         Background="#2A2A2A"
+                         Foreground="White"
+                         BorderBrush="#444"
+                         Padding="10"
+                         Margin="0,0,0,15"/>
+
+                <!-- Contraseña -->
+                <TextBlock Text="Contraseña"
+                           Foreground="White"
+                           Margin="0,0,0,5"/>
+
+                <PasswordBox x:Name="password"
+                             Height="40"
+                             FontSize="16"
+                             Background="#2A2A2A"
+                             Foreground="White"
+                             BorderBrush="#444"
+                             Padding="10"
+                             Margin="0,0,0,20"/>
+
+                <!-- Botón -->
+                <Button x:Name="entrar"
+                        Content="Entrar"
+                        Height="40"
+                        FontSize="16"
+                        Background="#1DB954"
+                        Foreground="White"
+                        BorderThickness="0"
+                        Click="Button_Click"/>
+
+            </StackPanel>
+
+        </Border>
+
     </Grid>
 </Window>

@@ -13,7 +13,7 @@ namespace InterficieSpotify
 {
     public partial class Songs : Window
     {
-        private readonly string apiUrl = "http://localhost:5000/cancons";
+        private readonly string apiUrl = "http://localhost:5080/cancons";
         private List<Canco> listaCancions;
 
         public Songs()
@@ -33,18 +33,18 @@ namespace InterficieSpotify
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    var response = await client.GetAsync(apiUrl);
+                    
 
-<<<<<<< HEAD
+
                     string url = "http://localhost:5080/cancons";
                     
 
                     var response = await client.GetAsync(url);
 
                     if (response.IsSuccessStatusCode) // Si l'api respon, es llegeix el contingut JSON
-=======
+
                     if (response.IsSuccessStatusCode)
->>>>>>> 5e564e084bbf2838e354eb8df2ff4e843e976b49
+
                     {
                         string json = await response.Content.ReadAsStringAsync();
                         var opciones = new JsonSerializerOptions

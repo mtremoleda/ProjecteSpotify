@@ -155,6 +155,12 @@ namespace InterficieSpotify
                 MessageBox.Show("Error carregant permisos: " + ex.Message);
             }
         }
+        private void Enrrere_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow main = new MainWindow();
+            this.Close();
+            main.Show();
+        }
     }
 
 
@@ -193,4 +199,7 @@ namespace InterficieSpotify
         public Guid RolId { get; set; }
         public Guid PermisosId { get; set; }
     }
+
+
+
 }

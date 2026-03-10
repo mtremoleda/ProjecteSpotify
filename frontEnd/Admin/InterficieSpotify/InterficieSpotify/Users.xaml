@@ -5,49 +5,113 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InterficieSpotify"
         mc:Ignorable="d"
-        Title="Users" Height="450" Width="800">
+        Title="Users"
+        Height="450"
+        Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="#121212">
+
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0*"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="0*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FF64467F"/>
-                <GradientStop Color="White" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
-        <Button x:Name="Enrrere" Content="🔙" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="Enrrere_Click" Background="{x:Null}" Height="38" Width="50" FontSize="20" BorderBrush="{x:Null}" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-        <Button x:Name="CarregarDades" Content="Get All" HorizontalAlignment="Left" Margin="271,29,0,0" VerticalAlignment="Top" Click="CarregarDades_Click" Height="44" Width="103" FontSize="22" Grid.ColumnSpan="2" Grid.Row="1">
-            <Button.Background>
-                <ImageBrush/>
-            </Button.Background>
-        </Button>
-        <DataGrid x:Name="dgUsers" 
-          AutoGenerateColumns="True"
-          IsReadOnly="True"
-          VerticalAlignment="Top"
-          Height="316" Margin="48,94,48,0" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-        <Button x:Name="Post" Content="Post" HorizontalAlignment="Left" Margin="400,29,0,0" VerticalAlignment="Top" Click="CarregarDades_Click" Height="44" Width="103" FontSize="22" Grid.ColumnSpan="2" Grid.Row="1">
-            <Button.Background>
-                <ImageBrush/>
-            </Button.Background>
-        </Button>
-        <Button x:Name="Put" Content="Put" HorizontalAlignment="Left" Margin="533,29,0,0" VerticalAlignment="Top" Click="CarregarDades_Click" Height="44" Width="103" FontSize="22" Grid.ColumnSpan="2" Grid.Row="1">
-            <Button.Background>
-                <ImageBrush/>
-            </Button.Background>
-        </Button>
-        <Button x:Name="Delete" Content="Delete" HorizontalAlignment="Left" Margin="661,29,0,0" VerticalAlignment="Top" Click="CarregarDades_Click" Height="44" Width="103" FontSize="22" Grid.ColumnSpan="2" Grid.Row="1">
-            <Button.Background>
-                <ImageBrush/>
-            </Button.Background>
-        </Button>
+
+        <!-- Botón volver -->
+        <Button x:Name="Enrrere"
+                Content="←"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="15"
+                Width="40"
+                Height="40"
+                FontSize="18"
+                Background="#1E1E1E"
+                Foreground="White"
+                BorderThickness="0"
+                Click="Enrrere_Click"/>
+
+        <!-- Card central -->
+        <Border Width="720"
+                Height="350"
+                Background="#1E1E1E"
+                CornerRadius="12"
+                Padding="20"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <!-- Cabecera -->
+                <DockPanel Margin="0,0,0,15">
+
+                    <TextBlock Text="Users"
+                               FontSize="24"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               DockPanel.Dock="Left"/>
+
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+
+                        <Button x:Name="CarregarDades"
+                                Content="Get All"
+                                Width="90"
+                                Height="35"
+                                Background="#1DB954"
+                                Foreground="White"
+                                BorderThickness="0"
+                                Margin="5"
+                                Click="CarregarDades_Click"/>
+
+                        <Button x:Name="Post"
+                                Content="Post"
+                                Width="90"
+                                Height="35"
+                                Background="#1DB954"
+                                Foreground="White"
+                                BorderThickness="0"
+                                Margin="5"
+                                Click="CarregarDades_Click"/>
+
+                        <Button x:Name="Put"
+                                Content="Put"
+                                Width="90"
+                                Height="35"
+                                Background="#1DB954"
+                                Foreground="White"
+                                BorderThickness="0"
+                                Margin="5"
+                                Click="CarregarDades_Click"/>
+
+                        <Button x:Name="Delete"
+                                Content="Delete"
+                                Width="90"
+                                Height="35"
+                                Background="#E74C3C"
+                                Foreground="White"
+                                BorderThickness="0"
+                                Margin="5"
+                                Click="CarregarDades_Click"/>
+
+                    </StackPanel>
+
+                </DockPanel>
+
+                <!-- DataGrid -->
+                <DataGrid x:Name="dgUsers"
+                          Grid.Row="1"
+                          AutoGenerateColumns="True"
+                          IsReadOnly="True"
+                          Background="#2A2A2A"
+                          Foreground="White"
+                          BorderBrush="#404040"
+                          RowBackground="#2A2A2A"
+                          AlternatingRowBackground="#333333"/>
+
+            </Grid>
+
+        </Border>
 
     </Grid>
 </Window>

@@ -5,51 +5,153 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InterficieSpotify"
         mc:Ignorable="d"
-        Title="Cançons" Height="500" Width="900">
+        Title="Songs"
+        Height="500"
+        Width="900"
+        WindowStartupLocation="CenterScreen"
+        Background="#121212">
+
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FFA29723"/>
-                <GradientStop Color="White" Offset="1"/>
-                <GradientStop Color="#FF8A897C" Offset="1"/>
-                <GradientStop Color="#FFE7E4C7" Offset="0.87"/>
-            </LinearGradientBrush>
-        </Grid.Background>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="10,10,10,10">
-            <Button x:Name="Enrrere" Content="🔙" Click="Enrrere_Click" Margin="0,0,10,0" Height="38" Width="50" FontSize="20" Background="Transparent" BorderBrush="Transparent"/>
-            <Button x:Name="CarregarDades" Content="Obtenir Totes" Click="CarregarDades_Click" Margin="0,0,10,0" Height="38" FontSize="16"/>
-            <Button x:Name="Post" Content="Afegir Cançó" Click="AfegirCancoDesdeGrid" Margin="0,0,10,0" Height="38" FontSize="16" Background="LightGreen"/>
-        </StackPanel>
+        <!-- Botón volver -->
+        <Button x:Name="Enrrere"
+                Content="←"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="15"
+                Width="40"
+                Height="40"
+                FontSize="18"
+                Background="#1E1E1E"
+                Foreground="White"
+                BorderThickness="0"
+                Click="Enrrere_Click"/>
 
-        <DataGrid x:Name="dgSongs" 
-                  Grid.Row="1"
-                  AutoGenerateColumns="False"
-                  CanUserAddRows="False"
-                  CanUserDeleteRows="False"
-                  CanUserSortColumns="True"
-                  Margin="10">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id, Mode=OneWay}" IsReadOnly="True" Width="*"/>
-                <DataGridTextColumn Header="Títol" Binding="{Binding Titol, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
-                <DataGridTextColumn Header="Artista" Binding="{Binding Artista, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
-                <DataGridTextColumn Header="Àlbum" Binding="{Binding Album, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
-                <DataGridTextColumn Header="Durada (seg)" Binding="{Binding Durada, UpdateSourceTrigger=PropertyChanged, StringFormat=F2}" Width="*"/>
-                <DataGridTemplateColumn Header="Accions" Width="120">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Button Content="Desar" Click="GuardarCancoDesdeGrid" Margin="2" Padding="5" Background="LightBlue" FontSize="10"/>
-                                <Button x:Name="btnEliminar" Content="Eliminar" Click="EliminarCancoDesdeGrid" Margin="2" Padding="5" Background="LightCoral" FontSize="10"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+        <!-- Card central -->
+        <Border Width="820"
+                Height="400"
+                Background="#1E1E1E"
+                CornerRadius="12"
+                Padding="20"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <!-- Cabecera -->
+                <DockPanel Margin="0,0,0,15">
+
+                    <TextBlock Text="Songs"
+                               FontSize="24"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               DockPanel.Dock="Left"/>
+
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+
+                        <Button x:Name="CarregarDades"
+                                Content="Obtenir Totes"
+                                Click="CarregarDades_Click"
+                                Width="130"
+                                Height="35"
+                                FontSize="14"
+                                Background="#1DB954"
+                                Foreground="White"
+                                BorderThickness="0"
+                                Margin="5"/>
+
+                        <Button x:Name="Post"
+                                Content="Afegir Cançó"
+                                Click="AfegirCancoDesdeGrid"
+                                Width="130"
+                                Height="35"
+                                FontSize="14"
+                                Background="#1DB954"
+                                Foreground="White"
+                                BorderThickness="0"
+                                Margin="5"/>
+
+                    </StackPanel>
+
+                </DockPanel>
+
+                <!-- DataGrid -->
+                <DataGrid x:Name="dgSongs"
+                          Grid.Row="1"
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False"
+                          CanUserDeleteRows="False"
+                          CanUserSortColumns="True"
+                          Background="#2A2A2A"
+                          Foreground="White"
+                          BorderBrush="#404040"
+                          RowBackground="#2A2A2A"
+                          AlternatingRowBackground="#333333">
+
+                    <DataGrid.Columns>
+
+                        <DataGridTextColumn Header="ID"
+                                            Binding="{Binding Id, Mode=OneWay}"
+                                            IsReadOnly="True"
+                                            Width="*"/>
+
+                        <DataGridTextColumn Header="Títol"
+                                            Binding="{Binding Titol, UpdateSourceTrigger=PropertyChanged}"
+                                            Width="*"/>
+
+                        <DataGridTextColumn Header="Artista"
+                                            Binding="{Binding Artista, UpdateSourceTrigger=PropertyChanged}"
+                                            Width="*"/>
+
+                        <DataGridTextColumn Header="Àlbum"
+                                            Binding="{Binding Album, UpdateSourceTrigger=PropertyChanged}"
+                                            Width="*"/>
+
+                        <DataGridTextColumn Header="Durada"
+                                            Binding="{Binding Durada, UpdateSourceTrigger=PropertyChanged}"
+                                            Width="*"/>
+
+                        <DataGridTemplateColumn Header="Accions" Width="140">
+                            <DataGridTemplateColumn.CellTemplate>
+
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+
+                                        <Button Content="Desar"
+                                                Click="GuardarCancoDesdeGrid"
+                                                Margin="3"
+                                                Padding="5"
+                                                Background="#1DB954"
+                                                Foreground="White"
+                                                FontSize="10"/>
+
+                                        <Button x:Name="btnEliminar"
+                                                Content="Eliminar"
+                                                Click="EliminarCancoDesdeGrid"
+                                                Margin="3"
+                                                Padding="5"
+                                                Background="#E74C3C"
+                                                Foreground="White"
+                                                FontSize="10"/>
+
+                                    </StackPanel>
+                                </DataTemplate>
+
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                    </DataGrid.Columns>
+
+                </DataGrid>
+
+            </Grid>
+
+        </Border>
+
     </Grid>
 </Window>

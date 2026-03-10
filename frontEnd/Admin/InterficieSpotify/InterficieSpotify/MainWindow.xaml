@@ -5,37 +5,80 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InterficieSpotify"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Spotify Admin"
+        Height="450"
+        Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="#121212">
+
     <Grid>
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="Black"/>
-                <GradientStop Color="White" Offset="1"/>
-                <GradientStop Color="#FF3E4D7B" Offset="0"/>
-                <GradientStop Color="#FF3E557B" Offset="0"/>
-                <GradientStop Color="#FF35341A" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="0*"/>
-        </Grid.ColumnDefinitions>
-        <Button x:Name="Cancons" Content="Songs" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="95,238,0,0" VerticalAlignment="Top" Click="Button_Click_1" Height="41" Width="140">
-            <Button.Background>
-                <ImageBrush/>
-            </Button.Background>
-        </Button>
-        <Button Content="Users" HorizontalAlignment="Center" Margin="0,238,0,0" VerticalAlignment="Top" Height="41" Width="140" Grid.Column="1" Click="Button_Click">
-            <Button.Background>
-                <ImageBrush/>
-            </Button.Background>
-        </Button>
-        <Button Content="Assignar Permis a un Rol" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="560,238,0,0" VerticalAlignment="Top" Height="41" Width="140" Click="Button_Click_2">
-            <Button.Background>
-                <ImageBrush/>
-            </Button.Background>
-        </Button>
-        <Label Content="Amb quina taula vols treballar?" HorizontalAlignment="Center" Margin="0,102,0,0" VerticalAlignment="Top" Width="284" Grid.Column="1" FontSize="20"/>
+
+        <!-- PANEL CENTRAL -->
+        <Border Width="500"
+                Height="260"
+                Background="#1E1E1E"
+                CornerRadius="12"
+                Padding="30"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+
+            <StackPanel>
+
+                <!-- TITULO -->
+                <TextBlock Text="Pantalla d'Administració"
+                           FontSize="26"
+                           Foreground="White"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,25"/>
+
+                <TextBlock Text="Amb quina taula vols treballar?"
+                           FontSize="16"
+                           Foreground="#B3B3B3"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,30"/>
+
+                <!-- BOTONES -->
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="0,10,0,0">
+
+                    <Button x:Name="Cancons"
+                            Content="Songs"
+                            Width="130"
+                            Height="45"
+                            FontSize="15"
+                            Background="#1DB954"
+                            Foreground="White"
+                            BorderThickness="0"
+                            Margin="10"
+                            Click="Button_Click_1"/>
+
+                    <Button Content="Users"
+                            Width="130"
+                            Height="45"
+                            FontSize="15"
+                            Background="#1DB954"
+                            Foreground="White"
+                            BorderThickness="0"
+                            Margin="10"
+                            Click="Button_Click"/>
+
+                    <Button Content="Assignar Permís"
+                            Width="130"
+                            Height="45"
+                            FontSize="15"
+                            Background="#1DB954"
+                            Foreground="White"
+                            BorderThickness="0"
+                            Margin="10"
+                            Click="Button_Click_2"/>
+
+                </StackPanel>
+
+            </StackPanel>
+
+        </Border>
+
     </Grid>
 </Window>

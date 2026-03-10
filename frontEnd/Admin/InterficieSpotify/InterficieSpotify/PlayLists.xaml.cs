@@ -25,7 +25,7 @@ namespace InterficieSpotify
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    string url = "http://localhost:5000/playlists"; //localhost:56832/playlists
+                    string url = "http://localhost:5080/playlists"; //localhost:56832/playlists
                     var response = await client.GetAsync(url);
 
                     if (response.IsSuccessStatusCode)
